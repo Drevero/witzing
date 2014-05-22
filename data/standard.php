@@ -412,7 +412,7 @@ function creer_notif($id_membre, $lien, $contenu, $avatar)
 {
 	try
 	{
-		$pdo = new PDO('mysql:host=localhost;dbname=witzing', 'root', 'lenvdev1createur');
+		$pdo = new PDO('mysql:host=localhost;dbname=', '', '');
 		$pdo->exec('SET CHARACTER SET utf8');
 	}
 	catch(Exception $e)
