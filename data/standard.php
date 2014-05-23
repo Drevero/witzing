@@ -410,16 +410,8 @@ function dateur($matches)
 }
 function creer_notif($id_membre, $lien, $contenu, $avatar)
 {
-	try
-	{
-		$pdo = new PDO('mysql:host=localhost;dbname=', '', '');
-		$pdo->exec('SET CHARACTER SET utf8');
-	}
-	catch(Exception $e)
-	{
-		die('Erreur : '.$e->getMessage());
-	}
-	$req_insert_notif_statut=$pdo->prepare('INSERT INTO notifications (membre_notif, contenu, lien, emetteur_notif, lu) VALUES(:membre_notif, :contenu, :lien, :emetteur_notif, 0)');
+	global $bdd;
+	$req_insert_notif_statut=$bdd->prepare('INSERT INTO notifications (membre_notif, contenu, lien, emetteur_notif, lu) VALUES(:membre_notif, :contenu, :lien, :emetteur_notif, 0)');
 	$req_insert_notif_statut->execute(array(
 		'membre_notif' => $id_membre,
 		'lien' => $lien,

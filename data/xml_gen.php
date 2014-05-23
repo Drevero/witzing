@@ -2,17 +2,13 @@
 /*
 Witzing Copyright (C) 2014 Rémi Duplé sous les termes de la license GNU GPL version 3 (voir le fichier "licence.txt")
 */
-session_start();
 header('Content-type: text/xml');
+session_start();
 include('bdd.php');
 include('standard.php');
 echo '<?xml version="1.0" encoding="UTF-8"?>';
 echo '<corp>';
-if(!(isset($_GET['req'])) && !(isset($_POST['message'])))
-{
-	header('Location: ../index.php');
-}
-if(!(isset($_SESSION['id_membre'])))
+if(!(isset($_SESSION['id_membre'])) || !(isset($_GET['req'])) && !(isset($_POST['message'])))
 {
 	header('Location: ../index.php');
 }
@@ -52,35 +48,7 @@ if($_GET['req']=='nmb_inscr_co')
 }
 if($_GET['req']=='demande_ami')
 {
-	$maj_compte=$bdd->prepare('UPDATE membres SET derniere_activite = NOW() WHERE id_membre = :id_membre');
-	$maj_compte->execute(array(
-	'id_membre' => $_SESSION['id_membre'],
-	));
-	$req_demande=$bdd->prepare('SELECT attente_amis FROM membres WHERE id_membre = :id_membre');
-	$req_demande->execute(array(
-		'id_membre' => $_SESSION['id_membre'],
-		));
-	$demande=$req_demande->fetch();
-	if($demande)
-	{
-		$liste_demande=explode('*', $demande['attente_amis']);
-		$nmb_demande=count($liste_demande)/2-0.5;
-	}
-	$req_demande->closeCursor();
-	echo '<nombre valeur="' . $nmb_demande . '"/>';
-	for($i=0;$i<count($liste_demande);$i++)
-	{
-		if($liste_demande[$i]!='')
-		{
-			$req_amis=$bdd->prepare('SELECT * FROM membres WHERE id_membre = :id');
-			$req_amis->execute(array(
-				'id' => $liste_demande[$i],
-				));
-			$amis=$req_amis->fetch();
-			echo '<demande pseudo="' . htmlspecialchars($amis['pseudo']) . '" avatar="' . $amis['avatar'] . '" id="' . $amis['id_membre'] . '"/>';
-			$req_amis->closeCursor();
-		}
-	}
+
 }
 if($_GET['req']=='recherche_membre')
 {
@@ -113,38 +81,13 @@ if($_GET['req']=='recherche_membre')
 }
 if($_GET['req']=='notif')
 {
-	$req_nmb_notif=$bdd->prepare('SELECT COUNT(*) AS nmb_notif FROM notifications WHERE membre_notif = :id_membre AND lu = 0');
-	$req_nmb_notif->execute(array(
-		'id_membre' => $_SESSION['id_membre'],
-		));
-	$nmb_notif=$req_nmb_notif->fetch();
-	echo '<nombre valeur="' . $nmb_notif['nmb_notif'] . '"/>';
-	$req_nmb_notif->closeCursor();
-	$req_notif=$bdd->prepare('SELECT * FROM notifications WHERE membre_notif = :id_membre AND lu = 0 ORDER BY id_notif DESC');
-	$req_notif->execute(array(
-		'id_membre' => $_SESSION['id_membre'],
-		));
-	while($notif=$req_notif->fetch())
-	{
-		$req_mmnotif=$bdd->prepare('SELECT avatar FROM membres WHERE id_membre = :id_membre');
-		$req_mmnotif->execute(array(
-			'id_membre' => $notif['emetteur_notif'],
-			));
-		$mmnotif=$req_mmnotif->fetch();
-		echo '<notification lien="index.php?notif_lus=' . $notif['id_notif'] . '" contenu="' . htmlspecialchars($notif['contenu']) . '" avatar="' . $mmnotif['avatar'] . '" id="' . $notif['id_notif'] . '"/>';
-		$req_mmnotif->closeCursor();
-	}
-	$req_notif->closeCursor();
-}
-if($_GET['req']=='notif_msg')
-{
 	$req_nmb_notif=$bdd->prepare('SELECT COUNT(*) AS nmb_msg FROM messages_perso WHERE lu = 0 AND salon REGEXP :salon_id AND id_auteur != :auteur');
 	$req_nmb_notif->execute(array(
 		'salon_id' => '\*' . $_SESSION['id_membre'] . '\*',
 		'auteur' => $_SESSION['id_membre'],
 		));
 	$nmb_notif=$req_nmb_notif->fetch();
-	echo '<nombre valeur="' . $nmb_notif['nmb_msg'] . '"/>';
+	echo '<nombremp valeur="' . $nmb_notif['nmb_msg'] . '"/>';
 	$req_nmb_notif->closeCursor();
 	$req_notif=$bdd->prepare('SELECT * FROM messages_perso WHERE lu = 0 AND salon REGEXP :salon_id AND id_auteur != :auteur ORDER BY id_message DESC');
 	$req_notif->execute(array(
@@ -174,6 +117,58 @@ if($_GET['req']=='notif_msg')
 		$req_auteur->closeCursor();
 	}
 	$req_notif->closeCursor();
+	$req_nmb_notif->closeCursor();
+	$req_nmb_notif=$bdd->prepare('SELECT COUNT(*) AS nmb_notif FROM notifications WHERE membre_notif = :id_membre AND lu = 0');
+	$req_nmb_notif->execute(array(
+		'id_membre' => $_SESSION['id_membre'],
+		));
+	$nmb_notif=$req_nmb_notif->fetch();
+	echo '<nombrenot valeur="' . $nmb_notif['nmb_notif'] . '"/>';
+	$req_nmb_notif->closeCursor();
+	$req_notif=$bdd->prepare('SELECT * FROM notifications WHERE membre_notif = :id_membre AND lu = 0 ORDER BY id_notif DESC');
+	$req_notif->execute(array(
+		'id_membre' => $_SESSION['id_membre'],
+		));
+	while($notif=$req_notif->fetch())
+	{
+		$req_mmnotif=$bdd->prepare('SELECT avatar FROM membres WHERE id_membre = :id_membre');
+		$req_mmnotif->execute(array(
+			'id_membre' => $notif['emetteur_notif'],
+			));
+		$mmnotif=$req_mmnotif->fetch();
+		echo '<notification lien="index.php?notif_lus=' . $notif['id_notif'] . '" contenu="' . htmlspecialchars($notif['contenu']) . '" avatar="' . $mmnotif['avatar'] . '" id="' . $notif['id_notif'] . '"/>';
+		$req_mmnotif->closeCursor();
+	}
+	$req_notif->closeCursor();
+	$maj_compte=$bdd->prepare('UPDATE membres SET derniere_activite = NOW() WHERE id_membre = :id_membre');
+	$maj_compte->execute(array(
+	'id_membre' => $_SESSION['id_membre'],
+	));
+	$req_demande=$bdd->prepare('SELECT attente_amis FROM membres WHERE id_membre = :id_membre');
+	$req_demande->execute(array(
+		'id_membre' => $_SESSION['id_membre'],
+		));
+	$demande=$req_demande->fetch();
+	if($demande)
+	{
+		$liste_demande=explode('*', $demande['attente_amis']);
+		$nmb_demande=count($liste_demande)/2-0.5;
+	}
+	$req_demande->closeCursor();
+	echo '<nombredmd valeur="' . $nmb_demande . '"/>';
+	for($i=0;$i<count($liste_demande);$i++)
+	{
+		if($liste_demande[$i]!='')
+		{
+			$req_amis=$bdd->prepare('SELECT * FROM membres WHERE id_membre = :id');
+			$req_amis->execute(array(
+				'id' => $liste_demande[$i],
+				));
+			$amis=$req_amis->fetch();
+			echo '<demande pseudo="' . htmlspecialchars($amis['pseudo']) . '" avatar="' . $amis['avatar'] . '" id="' . $amis['id_membre'] . '"/>';
+			$req_amis->closeCursor();
+		}
+	}
 }
 if(isset($_POST['message']) && strlen($_POST['message'])<=600 && isset($_POST['salon']))
 {

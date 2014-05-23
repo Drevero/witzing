@@ -3,10 +3,6 @@
 Witzing Copyright (C) 2014 Rémi Duplé sous les termes de la license GNU GPL version 3 (voir le fichier "licence.txt")
 */
 session_start();
-if(!isset($_SESSION['id_membre']))
-{
-	header('Location: ../index.php');
-}
 include('../data/bdd.php');
 include('../data/standard.php');
 if(isset($_POST['pseudo_mod']) && isset($_POST['email_mod']) && isset($_POST['avatar_change']) && isset($_POST['mdp1_mod']) && isset($_POST['mdp2_mod']) && isset($_FILES['fichier_avat']) && isset($_POST['theme_filactu']) && $_POST['theme_filactu']<=$theme_url && isset($_POST['fond_change']) && isset($_FILES['fichier_fond']))

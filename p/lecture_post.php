@@ -3,10 +3,6 @@
 Witzing Copyright (C) 2014 Rémi Duplé sous les termes de la license GNU GPL version 3 (voir le fichier "licence.txt")
 */
 session_start();
-if(!isset($_SESSION['id_membre']))
-{
-	header('Location: ../index.php');
-}
 include('../data/bdd.php');
 include('../data/standard.php');
 include('../licence_include.php');

@@ -3,7 +3,7 @@
 Witzing Copyright (C) 2014 Rémi Duplé sous les termes de la license GNU GPL version 3 (voir le fichier "licence.txt")
 */
 session_start();
-if(!isset($_SESSION['id_membre']) && !isset($_GET['id']) && $_GET['id']==$_SESSION['id_membre'])
+if(!isset($_GET['id']) && $_GET['id']==$_SESSION['id_membre'])
 {
 	header('Location: ../index.php');
 }

@@ -396,43 +396,6 @@ function switch_dis(nmb, etat)
 		document.getElementById('etat_dm' + nmb).style.display='none';
 	}
 }
-function demande_amis()
-{
-	var xhr=new XMLHttpRequest();
-	xhr.onreadystatechange = function() {
-		if(xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0))
-		{
-			document.getElementById('notif_amis_conteneur').innerHTML='';
-			var ndom=xhr.responseXML;
-			if(ndom.getElementsByTagName('nombre')[0].getAttribute('valeur')>0)
-			{
-				nombre_demande_amis=true;
-				document.getElementById('notif_amis').style.display='block';
-				document.getElementById('notif_amis').innerHTML=ndom.getElementsByTagName('nombre')[0].getAttribute('valeur');
-			}
-			else
-			{
-				nombre_demande_amis=false;
-				document.getElementById('notif_amis_conteneur').innerHTML+='<p class="no_demande">Aucune demande</p>';
-				document.getElementById('notif_amis').style.display='none';
-			}
-			var nmb_amisd=ndom.getElementsByTagName('demande').length;
-			for(var i=0;i<nmb_amisd;i++)
-			{
-				if(nmb_amisd==(i+1))
-				{
-					document.getElementById('notif_amis_conteneur').innerHTML+='<div class="demande_amis_p" style="border-bottom: 0px;" onmouseover="switch_dis(\'' + i + '\', true);" onmouseout="switch_dis(\'' + i + '\', false);"><img src="' + ndom.getElementsByTagName('demande')[i].getAttribute('avatar') + '" alt="avatar"/><p>' + echape_html(ndom.getElementsByTagName('demande')[i].getAttribute('pseudo')) + '</p><span class="typo refus_accept" id="etat_dm' + i +'"><a href="#" onclick="amis_conf(\'' + ndom.getElementsByTagName('demande')[i].getAttribute('id') + '\', false);" class="refus" title="Refuser la demande en amis de ' + echape_html(ndom.getElementsByTagName('demande')[i].getAttribute('pseudo')) + '">X</a> <a href="#" onclick="amis_conf(\'' + ndom.getElementsByTagName('demande')[i].getAttribute('id') + '\', true);" class="accept" title="Accepter la demande en amis de ' + echape_html(ndom.getElementsByTagName('demande')[i].getAttribute('pseudo')) + '">%</a></span></div>';
-				}
-				else
-				{
-					document.getElementById('notif_amis_conteneur').innerHTML+='<div class="demande_amis_p" onmouseover="switch_dis(\'' + i + '\', true);" onmouseout="switch_dis(\'' + i + '\', false);"><img src="' + ndom.getElementsByTagName('demande')[i].getAttribute('avatar') + '" alt="avatar"/><p>' + echape_html(ndom.getElementsByTagName('demande')[i].getAttribute('pseudo')) + '</p><span class="typo refus_accept" id="etat_dm' + i +'"><a href="#" onclick="amis_conf(\'' + ndom.getElementsByTagName('demande')[i].getAttribute('id') + '\', false);" class="refus" title="Refuser la demande en amis de ' + echape_html(ndom.getElementsByTagName('demande')[i].getAttribute('pseudo')) + '">X</a> <a href="#" onclick="amis_conf(\'' + ndom.getElementsByTagName('demande')[i].getAttribute('id') + '\', true);" class="accept" title="Accepter la demande en amis de ' + echape_html(ndom.getElementsByTagName('demande')[i].getAttribute('pseudo')) + '">%</a></span></div>';
-				}
-			}
-		}
-	};
-	xhr.open('GET', '../data/xml_gen.php?req=demande_ami', true);
-	xhr.send(null);
-}
 function supr_notif(id_notif)
 {
 	var xhr=new XMLHttpRequest();
@@ -469,7 +432,7 @@ function vider_message()
 	xhr.send(null);
 	cherche_notif(true);
 }
-function cherche_notif_msg()
+function cherche_notif(valeur)
 {
 	var notif_msg_conteneur=document.getElementById('notif_msg_conteneur');
 	var notif_msg=document.getElementById('notif_msg');
@@ -479,7 +442,7 @@ function cherche_notif_msg()
 		{
 			notif_msg_conteneur.innerHTML='';
 			var ndom=xhr.responseXML;
-			var nmb_notif=ndom.getElementsByTagName('nombre')[0].getAttribute('valeur');
+			var nmb_notif=ndom.getElementsByTagName('nombremp')[0].getAttribute('valeur');
 			if(nmb_notif>0)
 			{
 				nombre_notif_msg=true;
@@ -503,20 +466,8 @@ function cherche_notif_msg()
 				}
 				notif_msg_conteneur.innerHTML+='<div class="demande_amis_p poubelle_notif_con" style="background: #e8e8e8;"><p class="poubelle_notif" onclick="vider_message();">I</p></div>';
 			}
-		}
-	};
-	xhr.open('GET', '../data/xml_gen.php?req=notif_msg', true);
-	xhr.send(null);
-}
-function cherche_notif(reqsimple)
-{
-	var xhr=new XMLHttpRequest();
-	xhr.onreadystatechange = function() {
-		if(xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0))
-		{
 			document.getElementById('notif_plan_conteneur').innerHTML='';
-			var ndom=xhr.responseXML;
-			var nmb_notif=ndom.getElementsByTagName('nombre')[0].getAttribute('valeur');
+			var nmb_notif=ndom.getElementsByTagName('nombrenot')[0].getAttribute('valeur');
 			if(nmb_notif>0)
 			{
 				document.getElementById('notif_plan').style.display='block';
@@ -540,23 +491,38 @@ function cherche_notif(reqsimple)
 				}
 				document.getElementById('notif_plan_conteneur').innerHTML+='<div class="demande_amis_p poubelle_notif_con" style="background: #e8e8e8;"><p class="poubelle_notif" onclick="vider_notif();">I</p></div>';
 			}
+			document.getElementById('notif_amis_conteneur').innerHTML='';
+			if(ndom.getElementsByTagName('nombredmd')[0].getAttribute('valeur')>0)
+			{
+				nombre_demande_amis=true;
+				document.getElementById('notif_amis').style.display='block';
+				document.getElementById('notif_amis').innerHTML=ndom.getElementsByTagName('nombre')[0].getAttribute('valeur');
+			}
+			else
+			{
+				nombre_demande_amis=false;
+				document.getElementById('notif_amis_conteneur').innerHTML+='<p class="no_demande">Aucune demande</p>';
+				document.getElementById('notif_amis').style.display='none';
+			}
+			var nmb_amisd=ndom.getElementsByTagName('demande').length;
+			for(var i=0;i<nmb_amisd;i++)
+			{
+				if(nmb_amisd==(i+1))
+				{
+					document.getElementById('notif_amis_conteneur').innerHTML+='<div class="demande_amis_p" style="border-bottom: 0px;" onmouseover="switch_dis(\'' + i + '\', true);" onmouseout="switch_dis(\'' + i + '\', false);"><img src="' + ndom.getElementsByTagName('demande')[i].getAttribute('avatar') + '" alt="avatar"/><p>' + echape_html(ndom.getElementsByTagName('demande')[i].getAttribute('pseudo')) + '</p><span class="typo refus_accept" id="etat_dm' + i +'"><a href="#" onclick="amis_conf(\'' + ndom.getElementsByTagName('demande')[i].getAttribute('id') + '\', false);" class="refus" title="Refuser la demande en amis de ' + echape_html(ndom.getElementsByTagName('demande')[i].getAttribute('pseudo')) + '">X</a> <a href="#" onclick="amis_conf(\'' + ndom.getElementsByTagName('demande')[i].getAttribute('id') + '\', true);" class="accept" title="Accepter la demande en amis de ' + echape_html(ndom.getElementsByTagName('demande')[i].getAttribute('pseudo')) + '">%</a></span></div>';
+				}
+				else
+				{
+					document.getElementById('notif_amis_conteneur').innerHTML+='<div class="demande_amis_p" onmouseover="switch_dis(\'' + i + '\', true);" onmouseout="switch_dis(\'' + i + '\', false);"><img src="' + ndom.getElementsByTagName('demande')[i].getAttribute('avatar') + '" alt="avatar"/><p>' + echape_html(ndom.getElementsByTagName('demande')[i].getAttribute('pseudo')) + '</p><span class="typo refus_accept" id="etat_dm' + i +'"><a href="#" onclick="amis_conf(\'' + ndom.getElementsByTagName('demande')[i].getAttribute('id') + '\', false);" class="refus" title="Refuser la demande en amis de ' + echape_html(ndom.getElementsByTagName('demande')[i].getAttribute('pseudo')) + '">X</a> <a href="#" onclick="amis_conf(\'' + ndom.getElementsByTagName('demande')[i].getAttribute('id') + '\', true);" class="accept" title="Accepter la demande en amis de ' + echape_html(ndom.getElementsByTagName('demande')[i].getAttribute('pseudo')) + '">%</a></span></div>';
+				}
+			}
 		}
 	};
-	if(nombre_notif_msg || nombre_notif || nombre_demande_amis)
-	{
-		document.title='!! ' + titre_fenetre + ' !!';
-	}
-	else
-	{
-		document.title=titre_fenetre;
-	}
 	xhr.open('GET', '../data/xml_gen.php?req=notif', true);
 	xhr.send(null);
-	demande_amis();
-	cherche_notif_msg();
-	if(!reqsimple)
+	if(!valeur)
 	{
-		setTimeout('cherche_notif()', 5000);
+		setTimeout('cherche_notif()', 10000);
 	}
 }
 function amis_conf(ida, ref)
@@ -796,6 +762,4 @@ if(~navigator.userAgent.indexOf('Windows'))
 	}
 }
 cherche_notif();
-demande_amis();
-cherche_notif_msg();
 recup_nmb_co();

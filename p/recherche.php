@@ -5,14 +5,7 @@ Witzing Copyright (C) 2014 Rémi Duplé sous les termes de la license GNU GPL ve
 session_start();
 include('../data/bdd.php');
 include('../data/standard.php');
-if(!isset($_SESSION['id_membre']))
-{
-	header('Location: ../index.php');
-}
-if(isset($_GET['recherche_cle']) && strlen($_GET['recherche_cle'])<50)
-{
-}
-else
+if(!isset($_GET['recherche_cle']) && !strlen($_GET['recherche_cle'])<50)
 {
 	header('Location: index.php?id=' . $_SESSION['id_membre']);
 }

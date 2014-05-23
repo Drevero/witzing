@@ -3,16 +3,8 @@
 Witzing Copyright (C) 2014 Rémi Duplé sous les termes de la license GNU GPL version 3 (voir le fichier "licence.txt")
 */
 session_start();
-if(!isset($_SESSION['id_membre']))
-{
-	header('Location: ../index.php');
-}
 include('../data/bdd.php');
 include('../data/standard.php');
-if(!isset($_GET['id']))
-{
-	header('Location: index.php?id=' . $_SESSION['id_membre']);
-}
 if(isset($_GET['nom']))
 {
 	$req_info_membre_nom=$bdd->prepare('SELECT * FROM membres WHERE pseudo = :nom');
