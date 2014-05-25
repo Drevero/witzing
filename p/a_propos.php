@@ -67,7 +67,7 @@ et/ou violent.</p>
 		<p class="sous_titre_a_propos">Crédits</p>
 		<p class="texte_contenu_a_propos">Création et programmation : Drevero, adresse email : <a href="mailto:drevero@drevero.zz.mu">drevero@drevero.zz.mu</a>, site web : <a href="http://drevero.zz.mu/" title="Site web">http://drevero.zz.mu/</a><br/><br/>Gestion publique : TheEdanox, adresse email : <a href="mailto:pro@theedanox.url.ph">pro@theedanox.url.ph</a>, site web : <a href="http://www.theedanox.url.ph/" title="Site web">http://www.theedanox.url.ph/.</a></p>
 		<p class="sous_titre_a_propos">Hébergement</p>
-		<p class="texte_contenu_a_propos">PulseHeberg permet à Witzing d'être présent sur le web (<a href="http://www.pulseheberg.com/">http://www.pulseheberg.com/</a>).</p>
+		<p class="texte_contenu_a_propos">PulseHeberg permet à Witzing d'être présent sur le web (<a href="http://www.pulseheberg.com/">http://www.pulseheberg.com/</a>) ainsi qu'à Olympe (<a href="http://www.olympe.in/">http://www.olympe.in/</a>).</p>
 	</div>
 </div>
 <?php
