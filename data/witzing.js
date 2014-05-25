@@ -1,7 +1,7 @@
 /*
 Witzing Copyright (C) 2014 Rémi Duplé sous les termes de la license GNU GPL version 3 (voir le fichier "licence.txt")
 */
-var nombre_notif_msg=0, nombre_notif=0, nombre_demande_amis=0, titre_fenetre=document.title;
+var titre_fenetre=document.title;
 function getXMLHttpRequest()
 {
 	var xhr = null;
@@ -516,6 +516,14 @@ function cherche_notif(valeur)
 					document.getElementById('notif_amis_conteneur').innerHTML+='<div class="demande_amis_p" onmouseover="switch_dis(\'' + i + '\', true);" onmouseout="switch_dis(\'' + i + '\', false);"><img src="' + ndom.getElementsByTagName('demande')[i].getAttribute('avatar') + '" alt="avatar"/><p>' + echape_html(ndom.getElementsByTagName('demande')[i].getAttribute('pseudo')) + '</p><span class="typo refus_accept" id="etat_dm' + i +'"><a href="#" onclick="amis_conf(\'' + ndom.getElementsByTagName('demande')[i].getAttribute('id') + '\', false);" class="refus" title="Refuser la demande en amis de ' + echape_html(ndom.getElementsByTagName('demande')[i].getAttribute('pseudo')) + '">X</a> <a href="#" onclick="amis_conf(\'' + ndom.getElementsByTagName('demande')[i].getAttribute('id') + '\', true);" class="accept" title="Accepter la demande en amis de ' + echape_html(ndom.getElementsByTagName('demande')[i].getAttribute('pseudo')) + '">%</a></span></div>';
 				}
 			}
+		}
+		if(nombre_notif || nombre_demande_amis || nombre_notif_msg)
+		{
+			document.title='! ' + titre_fenetre + ' !';
+		}
+		else
+		{
+			document.title=titre_fenetre;
 		}
 	};
 	xhr.open('GET', '../data/xml_gen.php?req=notif', true);
