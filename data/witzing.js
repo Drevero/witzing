@@ -480,13 +480,14 @@ function cherche_notif(valeur)
 			}
 			if(ndom.getElementsByTagName('notification').length==0)
 			{
+				nombre_notif=false;
 				document.getElementById('notif_plan_conteneur').innerHTML='<p class="no_demande">Aucune Notification</p>';
 			}
 			else
 			{
+				nombre_notif=true;
 				for(var i=0;i<ndom.getElementsByTagName('notification').length;i++)
 				{
-					nombre_notif=true;
 					document.getElementById('notif_plan_conteneur').innerHTML+='<div class="demande_amis_p" style="background: #e8e8e8;"><img src="' + ndom.getElementsByTagName('notification')[i].getAttribute('avatar') + '" alt="avatar"/><p class="supr_notif_bt" onclick="supr_notif(' + ndom.getElementsByTagName('notification')[i].getAttribute('id') + ');">x</p><a href="' + ndom.getElementsByTagName('notification')[i].getAttribute('lien') + '"><p class="notif_texte">' + echape_html(ndom.getElementsByTagName('notification')[i].getAttribute('contenu')) + '</p></a></div>';
 				}
 				document.getElementById('notif_plan_conteneur').innerHTML+='<div class="demande_amis_p poubelle_notif_con" style="background: #e8e8e8;"><p class="poubelle_notif" onclick="vider_notif();">I</p></div>';
@@ -496,7 +497,7 @@ function cherche_notif(valeur)
 			{
 				nombre_demande_amis=true;
 				document.getElementById('notif_amis').style.display='block';
-				document.getElementById('notif_amis').innerHTML=ndom.getElementsByTagName('nombre')[0].getAttribute('valeur');
+				document.getElementById('notif_amis').innerHTML=ndom.getElementsByTagName('nombredmd')[0].getAttribute('valeur');
 			}
 			else
 			{
