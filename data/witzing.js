@@ -184,7 +184,8 @@ function envois_message_salon(contenu)
 		};
 		xhr.open('POST', '../data/xml_gen.php', true);
 		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		xhr.send('message_salon=' + contenu);
+		var contenuEncoded = encodeURIComponent(contenu);
+		xhr.send('message_salon=' + contenuEncoded);
 		cont_message.value='';
 		cont_message.setAttribute('class', '');
 	}
