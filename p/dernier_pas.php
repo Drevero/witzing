@@ -32,7 +32,7 @@ if(isset($_SESSION['pseudo_inscr']) && isset($_SESSION['passe_inscr']) && isset(
 		{
 			$nom_fichier='../data/style/portrait_defaut.png';
 		}
-		$req_insert_mm=$bdd->prepare('INSERT INTO membres (pseudo, passe, mail, avatar, date_inscription, attente_amis, badges) VALUES(:pseudo, :passe, :mail, :avatar, NOW(), \'*1*\', \'*3*\')');
+		$req_insert_mm=$bdd->prepare('INSERT INTO membres (pseudo, passe, mail, avatar, date_inscription, badges) VALUES(:pseudo, :passe, :mail, :avatar, NOW(), \'*3*\')');
 		$req_insert_mm->execute(array(
 			'pseudo' => $_SESSION['pseudo_inscr'],
 			'passe' => $_SESSION['passe_inscr'],
