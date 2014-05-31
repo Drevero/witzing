@@ -193,6 +193,6 @@ if(isset($_GET['reussi']) && !(isset($_GET['erreur'])) && !(isset($_GET['erreur2
 		<a href="cloturer_compte.php" title="Cliquer pour clôturer votre compte"><input type="button" value="Clôturer mon compte" id="cloturer_compte"/></a>
 	</div>
 </div>
-<script type="text/javascript" src="../data/witzing.js"></script>
+<script type="text/javascript" src="../data/witzing.php"></script>
 </body>
 </html>

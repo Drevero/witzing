@@ -52,6 +52,6 @@ include('../data/bandeau.php');
 	<p><?php if(isset($_GET['rep']) && $_GET['rep']!='') { echo $_GET['rep']; } else { echo 'Pas de retour SQL'; } ?></p>
 </div>
 </div>
-<script type="text/javascript" src="../data/witzing.js"></script>
+<script type="text/javascript" src="../data/witzing.php"></script>
 </body>
 </html>

@@ -99,6 +99,6 @@ if(nombre_form($recherche['amis'])<2)
 		?>
 	</div>
 </div>
-<script type="text/javascript" src="../data/witzing.js"></script>
+<script type="text/javascript" src="../data/witzing.php"></script>
 </body>
 </html>

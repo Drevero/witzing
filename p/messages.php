@@ -127,7 +127,7 @@ $req_messages->closeCursor();
 $limite_statut_plus=($limite_statut+4);
 ?><div class="cadre_droite"> <?php if($limite_statut<$nmb_msg['nmb_msg']) { ?><a href="messages.php?id=<?php echo $_GET['id']; ?>&amp;archive&amp;page=<?php echo $limite_statut_plus; ?>#afficher_plus_msg"><?php } ?><input type="button" <?php if($limite_statut>=$nmb_msg['nmb_msg']) { ?>class="pas_afficher"<?php } ?> value="Afficher plus" id="afficher_plus_msg"/><?php if($limite_statut<$nmb_msg['nmb_msg']) { ?></a><?php } ?><a href="messages.php?id=<?php echo $_GET['id']; ?>"><input type="button" value="Retour" id="bt_retour_discu"/></a></div>
 </div>
-<script type="text/javascript" src="../data/witzing.js"></script>
+<script type="text/javascript" src="../data/witzing.php"></script>
 <?php
 }
 $req_info_membre->closeCursor();

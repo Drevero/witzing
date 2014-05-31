@@ -147,6 +147,6 @@ include('../data/bandeau.php');
 		<a href="cloturer_compte.php?oui" title="Cloturer le compte"><input type="button" value="Oui je suis sûr(e)" id="cloturer_compte_confirm"/></a>
 	</div>
 </div>
-<script type="text/javascript" src="../data/witzing.js"></script>
+<script type="text/javascript" src="../data/witzing.php"></script>
 </body>
 </html>

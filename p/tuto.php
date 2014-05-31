@@ -28,6 +28,6 @@ include('../data/bandeau.php');
 		<a href="../index.php" title="Retour à la page d'accueil"><input type="button" value="Allez sur mon fil d'actu" id="annuler_compte_confirm"/></a>
 	</div>
 </div>
-<script type="text/javascript" src="../data/witzing.js"></script>
+<script type="text/javascript" src="../data/witzing.php"></script>
 </body>
 </html>

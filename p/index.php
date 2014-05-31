@@ -493,6 +493,6 @@ include('../data/bandeau.php');
 		$limite_statut_plus=($limite_statut+5);
 		if($limite_statut<$test['nmb_statut']) { ?><a href="index.php?id=<?php echo $_GET['id']; ?>&amp;page=<?php echo $limite_statut_plus; ?>#afficher_plus"><?php } ?><input type="button" <?php if($limite_statut>=$test['nmb_statut']) { ?>class="pas_afficher"<?php } ?> value="Afficher plus" id="afficher_plus"/><?php if($limite_statut<$test['nmb_statut']) { ?></a><?php } ?>
 </div>
-<script type="text/javascript" src="../data/witzing.js"></script>
+<script type="text/javascript" src="../data/witzing.php"></script>
 </body>
 </html>

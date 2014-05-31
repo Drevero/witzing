@@ -48,7 +48,7 @@ else
 <?php
 }
 ?>
-<script type="text/javascript" src="../data/witzing.js"></script>
+<script type="text/javascript" src="../data/witzing.php"></script>
 <?php
 if(isset($_GET['verif']))
 {
