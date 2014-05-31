@@ -345,7 +345,8 @@ function citeur_mm($cite)
 }
 function linkeur($lien)
 {
-	$lien=preg_replace('#(http|ftp|steam|https)://([A-Z0-9_-]+)(\.[a-z0-9]+){1,2}/?([A-Z0-9-/_\.\?=&;]+)#i', '<a href="$0" title="$0">$0</a>', $lien);
+	$lien=preg_replace('#(http|ftp|steam|https)://([A-Z0-9_-]+)(\.[a-z0-9]+){1,2}/?([A-Z0-9-/_\?=&;]+)$#i', '<a href="$0" title="$0">$0</a>', $lien);
+	$lien=preg_replace('#(http|ftp|steam|https)://([A-Z0-9_-]+)(\.[a-z0-9]+){1,2}/?([A-Z0-9-/_\.\?=&;]+)([\.(png|PNG|jpg|jpeg|gif|GIF)]+)$#i', '<a href="javascript:;" onclick="lightbox(\'$0\', true);"><img src="$0" onload="this.style.background=\'transparent\';" class="mini_img" title="$0"/></a>', $lien);
 	return $lien;
 }
 function emoticons($texte)
