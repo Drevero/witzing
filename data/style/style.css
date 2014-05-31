@@ -927,13 +927,18 @@ a#archive_lien:hover {
 	color: #777777;
 }
 a#archive_lien {
-	color: #999999;
 	font-family: OpenSans;
-	font-size: 15px;
 	display: block;
 	position: relative;
 	text-align: center;
-	top: -15px;
+	top: 10x;
+	border: 1px solid #a9a9a9;
+	background-color: #f9f9f9;
+	color: #6d6d6d;
+	margin: auto;
+	width: 152px;
+	font-family: OpenSans;
+	font-size: 18px;
 }
 .pas_afficher {
 	opacity: 0;
