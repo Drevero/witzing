@@ -4,7 +4,7 @@ Witzing Copyright (C) 2014 Rémi Duplé sous les termes de la license GNU GPL ve
 */
 try
 {
-	$bdd = new PDO('mysql:host=localhost;dbname=witzing', '', '');
+	$bdd = new PDO('mysql:host=localhost;dbname=witzing', 'root', 'lenvdev1createur');
 	$bdd->exec('SET CHARACTER SET utf8');
 }
 catch(Exception $e)

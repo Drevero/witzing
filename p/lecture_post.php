@@ -14,7 +14,7 @@ include('../licence_include.php');
 <meta name="viewport" content="width=device-width,user-scalable=no">
 <meta name="keywords" content="Witzing"/>
 <title>Witzing - Statut ouvert</title>
-<link rel="stylesheet" href="../data/style/style.css"/>
+<link rel="stylesheet" href="../data/style/style.php"/>
 <?php
 $_GET['id']=(int) $_GET['id'];
 $req_membre_statut=$bdd->prepare('SELECT membre_statut FROM statuts WHERE id_statut = :id_statut');

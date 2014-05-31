@@ -39,7 +39,7 @@ include('licence_include.php');
 <meta name="description" content="Bienvenue sur Witzing, un réseau social 100% libre et Français"/>
 <meta name="keywords" content="Witzing"/>
 <title>Witzing - Mot de passe perdu ?</title>
-<link rel="stylesheet" href="data/style/style.css"/>
+<link rel="stylesheet" href="data/style/style.php"/>
 <link rel="icon" href="data/style/logo.png" type="image/png" />
 </head>
 <body>

@@ -18,7 +18,7 @@ $nmb_co=$req_nmb_co->fetch();
 <meta name="viewport" content="width=device-width,user-scalable=no">
 <meta name="keywords" content="Witzing"/>
 <title>Witzing - Le Salon</title>
-<link rel="stylesheet" href="../data/style/style.css"/>
+<link rel="stylesheet" href="../data/style/style.php"/>
 <link rel="icon" href="../data/style/logo.png" type="image/png" />
 </head>
 <body>

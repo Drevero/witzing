@@ -74,7 +74,7 @@ include('../licence_include.php');
 <meta name="viewport" content="width=device-width,user-scalable=no">
 <meta name="keywords" content="Witzing"/>
 <title>Witzing</title>
-<link rel="stylesheet" href="../data/style/style.css"/>
+<link rel="stylesheet" href="../data/style/style.php"/>
 <link rel="icon" href="../data/style/logo.png" type="image/png" />
 </head>
 <body>

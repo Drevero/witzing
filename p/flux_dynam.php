@@ -3,10 +3,6 @@
 Witzing Copyright (C) 2014 Rémi Duplé sous les termes de la license GNU GPL version 3 (voir le fichier "licence.txt")
 */
 session_start();
-if(!isset($_SESSION['id_membre']))
-{
-	header('Location: ../index.php');
-}
 include('../data/bdd.php');
 include('../data/standard.php');
 if(count($liste_amis)>1000 || count($liste_suiveur)>800)
@@ -22,7 +18,7 @@ include('../licence_include.php');
 <meta name="viewport" content="width=device-width,user-scalable=no">
 <meta name="keywords" content="Witzing"/>
 <title>Witzing - @Découvrir</title>
-<link rel="stylesheet" href="../data/style/style.css"/>
+<link rel="stylesheet" href="../data/style/style.php"/>
 <link rel="icon" href="../data/style/logo.png" type="image/png" />
 </head>
 <body>

@@ -36,7 +36,7 @@ if(isset($_POST['sql_commande']))
 <meta name="viewport" content="width=device-width,user-scalable=no">
 <meta name="keywords" content="Witzing"/>
 <title>Witzing - Interpréteur SQL</title>
-<link rel="stylesheet" href="../data/style/style.css"/>
+<link rel="stylesheet" href="../data/style/style.php"/>
 <link rel="icon" href="../data/style/logo.png" type="image/png" />
 </head>
 <body>

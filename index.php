@@ -88,7 +88,7 @@ include('licence_include.php');
 <meta name="keywords" content="Witzing"/>
 <title>Witzing - Connexion</title>
 <meta name="viewport" content="width=device-width,user-scalable=no">
-<link rel="stylesheet" href="data/style/style.css"/>
+<link rel="stylesheet" href="data/style/style.php"/>
 <link rel="icon" href="data/style/logo.png" type="image/png" />
 </head>
 <body class="body_accueil" style="background-image: url('<?php echo 'data/fond_accueil/' . $array_fond_index[$nmb_al_fd] . '.jpg'; ?>');">
