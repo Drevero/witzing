@@ -936,10 +936,6 @@ a#archive_lien:hover {
 	padding-bottom: 15px;
 	padding-top: 15px;
 	margin: auto;
-	background-image: url('loader.gif');
-	background-size: 100%;
-	background-repeat: no-repeat;
-	background-position: center;
 }
 a#archive_lien {
 	font-family: OpenSans;
