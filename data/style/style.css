@@ -926,6 +926,21 @@ input#afficher_plus_msg {
 a#archive_lien:hover {
 	color: #777777;
 }
+.mini_img {
+	display: block;
+	position: relative;
+	height: auto;
+	width: auto;
+	max-height: 200px;
+	max-width: 200px;
+	padding-bottom: 15px;
+	padding-top: 15px;
+	margin: auto;
+	background-image: url('loader.gif');
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+}
 a#archive_lien {
 	font-family: OpenSans;
 	display: block;
