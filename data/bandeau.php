@@ -41,6 +41,8 @@ $urlbase=$_SERVER['REQUEST_URI'];
 </select>
 </div>
 <div id="lightbox">
+	<ul id="liste_smile">
+	</ul>
 	<img src="" alt="img" onclick="lightbox('', false);" id="lightbox_img"/>
 	<span id="fermer_lightbox" onclick="lightbox('', false);">Fermer</span>
 </div>

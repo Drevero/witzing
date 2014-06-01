@@ -421,6 +421,7 @@ include('../data/bandeau.php');
 		<div class="post ecriture_statut">
 			<form method="post" id="post_form" enctype="multipart/form-data">
 				<textarea name="post_text" id="post_text" maxlength="800" placeholder="Ecrivez sur <?php if($_GET['id']==$_SESSION['id_membre']) { echo 'votre fil d\'actu ...'; } else { echo 'le fil d\'actu de ' . $info_membre['pseudo'] . '...'; } ?>"></textarea>
+				<img src="../data/emoticons/smile2.png" onclick="boite_smiley('post_text');" id="bt_ouvrir_smilestatut"/>
 				<input type="hidden" value="<?php echo $info_membre['id_membre'] ?>" name="destinataire"/>
 				<input type="button" value="A" onclick="changer_photo_statut();" class="photo_post_bt"/>
 				<input type="file" id="fichier_photo" name="fichier_photo" onchange="visual_photo_statut();" accept="image/*"/>

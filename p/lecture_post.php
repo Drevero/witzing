@@ -277,6 +277,7 @@ $req_sup_notif->execute(array(
 			<form method="post" id="form_comment" onsubmit="verif_comment();return false;">
 				<input type="text" maxlength="180" placeholder="Votre commentaire ..." class="input_comment" id="comment_input_text" name="commentaire"/>
 				<input type="hidden" name="id_comment" value="<?php echo htmlspecialchars($_GET['id']); ?>"/>
+				<img src="../data/emoticons/smile2.png" onclick="boite_smiley('comment_input_text');" id="bt_ouvrir_smilecomment"/>
 				<input type="submit" class="bt_poster_comment" value="Poster"/>
 			</form>
 		</div>

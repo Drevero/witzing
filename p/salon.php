@@ -44,6 +44,7 @@ else
 </div>
 <form name="salon" method="post" id="salon_form" onsubmit="envois_message_salon(document.getElementById('cont_message_salon').value);return false;">
 	<input type="text" placeholder="Tapez ici votre message ..." maxlength="600" id="cont_message_salon"/>
+	<img src="../data/emoticons/smile2.png" onclick="boite_smiley('cont_message_salon');" id="bt_ouvrir_smilesalon"/>
 </form>
 <?php
 }

@@ -19,12 +19,6 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 		background-image: none !important;
 		background-color: #f4f4f4 !important;
 	}
-	#afficher_plus_msg {
-		left: 0px !important;
-	}
-	#bt_retour_discu {
-		left: 0px !important;
-	}
 	#conteneur_inscr_dernier {
 		width: 80% !important;
 	}
@@ -141,13 +135,8 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 	div#conteneur_mm_co {
 		z-index: 200 !important;
 	}
-	.texte_msg {
-		width: 70% !important;
-	}
-	.texte_msg_droite {
-		width: 70% !important;
-		float: right !important;
-		margin-right: 12% !important;
+	p.texte_msg {
+		width: 80%;
 	}
 }
 html, body {
@@ -367,6 +356,82 @@ div#lightbox img {
 	margin-top: 1%;
 	background-color: #1b1b1b;
 }
+div#lightbox ul {
+	display: block;
+	position: relative;
+	padding-right: 20px;
+	padding-left: 0px;
+	padding-top: 0px;
+	height: 300px;
+	overflow-y: auto;
+}
+#bt_ouvrir_smile {
+	display: block;
+	position: relative;
+	float: right;
+	border-left: 1px solid #a9a9a9;
+	left: 3px;
+	top: 0px;
+	height: 28px;
+	cursor: pointer;
+	opacity: 0.5;
+	padding-left: 5px;
+}
+#bt_ouvrir_smilesalon {
+	display: block;
+	position: relative;
+	float: right;
+	border-left: 1px solid #a9a9a9;
+	left: -38px;
+	top: -4px;
+	height: 28px;
+	cursor: pointer;
+	opacity: 0.5;
+	padding-left: 5px;
+}
+#bt_ouvrir_smilesalon:hover {
+	opacity: 1;
+}
+#bt_ouvrir_smile:hover {
+	opacity: 1;
+}
+#bt_ouvrir_smilecomment {
+	display: block;
+	position: relative;
+	float: right;
+	border-left: 1px solid #a9a9a9;
+	left: -15px;
+	top: -7px;
+	height: 23px;
+	cursor: pointer;
+	opacity: 0.5;
+	padding-left: 5px;
+}
+#bt_ouvrir_smilecomment:hover {
+	opacity: 1;
+}
+#bt_ouvrir_smilestatut {
+	display: block;
+	position: relative;
+	float: right;
+	border-left: 1px solid #a9a9a9;
+	border-top: 1px solid #a9a9a9;
+	left: -10px;
+	top: -14px;
+	height: 23px;
+	cursor: pointer;
+	opacity: 0.5;
+	padding-left: 2px;
+}
+#bt_ouvrir_smilestatut:hover {
+	opacity: 1;
+}
+div#lightbox li {
+	display: block;
+	float: left;
+	margin-left: 20px;
+	margin-top: 20px;
+}
 div#lightbox {
 	display: none;
 	position: fixed;
@@ -543,8 +608,21 @@ a.auteur_texte.parle_moi {
 	margin-left: 8px;
 	border-left: 4px dotted #5eb62e;
 }
+p.date_texte {
+	color: #a2a2a2;
+	display: block;
+	position: relative;
+	top: -14px;
+	left: 58px;
+	z-index: 1;
+	font-size: 15px;
+	font-family: OpenSans;
+}
 span.date_texte {
 	color: #a2a2a2;
+	z-index: 1;
+	font-size: 15px;
+	font-family: OpenSans;
 }
 span.repondre_membre {
 	color: #a2a2a2;
@@ -907,12 +985,27 @@ input#bt_retour_discu {
 	font-size: 17px;
 	width: 180px;
 	margin: auto;
-	left: -190px;
 	top: 20px;
 	display: block;
 	cursor: pointer;
 	background-color: #f9f9f9;
 	border: 1px solid #a9a9a9;
+}
+.avat_msg_droite {
+	position: relative !important;
+	float: right;
+	right: 20px;
+}
+.date_texte_droite {
+	text-align: right;
+	left: -30px !important;
+}
+.texte_msg_droite {
+	text-align: right;
+	left: -30px !important;
+}
+.texte_msg_droite img.mini_img {
+	float: right;
 }
 input#afficher_plus_msg {
 	position: relative;
@@ -921,7 +1014,6 @@ input#afficher_plus_msg {
 	font-size: 17px;
 	width: 180px;
 	margin: auto;
-	left: -190px;
 	top: 0px;
 	display: block;
 	cursor: pointer;
@@ -940,7 +1032,6 @@ img.mini_img {
 	max-width: 200px;
 	padding-bottom: 15px;
 	padding-top: 15px;
-	margin: auto;
 }
 a#archive_lien {
 	font-family: OpenSans;
@@ -1187,10 +1278,6 @@ p.texte_msg a {
 	color: #1470d9 !important;
 	text-decoration: none;
 }
-p.texte_msg_droite a {
-	color: #1470d9 !important;
-	text-decoration: none;
-}
 input#cont_message:focus {
 	border: 1px solid #68a5cb;
 }
@@ -1213,75 +1300,15 @@ form#message {
 	margin: auto;
 	padding-bottom: 30px;
 }
-p.texte_msg_droite {
-	display: block;
-	position: relative;
-	border: 1px solid #d8d9d9;
-	background-color: #f9f9f9;
-	min-height: 20px;
-	height: auto;
-	padding: 8px;
-	text-align: right;
-	word-wrap: break-word;
-	width: 400px;
-	top: 2px;
-	left: -2px;
-	z-index: 1;
-	font-size: 15px;
-	font-family: OpenSans;
-	white-space: pre-wrap;
-	line-height: 15px;
-}
-img.avat_msg_droite {
-	height: 50px;
-	width: 50px;
-	-moz-border-radius: 10px;
-	-o-border-radius: 10px;
-	-webkit-border-radius: 10px;
-	-ms-border-radius: 10px;
-	border-radius: 10px;
-	display: block;
-	left: 425px;
-	position: absolute;
-}
-img.fleche_droite {
-	display: block;
-	position: absolute;
-	top: 15px;
-	z-index: 2;
-	left: 415px;
-}
-div.cadre_droite {
-	min-height: 100px;
-	width: 475px;
-	float: right;
-	top: 50px;
-	position: relative;
-}
 p.texte_msg {
 	display: block;
 	position: relative;
-	border: 1px solid #d8d9d9;
-	background-color: #f9f9f9;
-	min-height: 20px;
-	height: auto;
-	padding: 8px;
-	word-wrap: break-word;
-	width: 400px;
-	top: 2px;
 	left: 58px;
 	z-index: 1;
+	width: 95%;
+	top: -20px;
 	font-size: 15px;
 	font-family: OpenSans;
-	white-space: pre-wrap;
-	line-height: 15px;
-}
-img.fleche_gauche {
-	display: block;
-	position: absolute;
-	top: 15px;
-	z-index: 2;
-	left: 45px;
 }
 img.avat_msg {
 	height: 50px;
@@ -1294,12 +1321,16 @@ img.avat_msg {
 	display: block;
 	position: absolute;
 }
-div.cadre_gauche {
-	min-height: 100px;
-	width: 475px;
-	float: left;
-	top: 50px;
+div.cadre_msg {
+	display: block;
 	position: relative;
+	height: auto;
+	padding-left: 20px;
+	padding-top: 30px;
+	padding-bottom: 0px;
+	margin-top: -1px;
+	overflow-x: hidden;
+	word-wrap: break-word;
 }
 img#con_message {
 	display: inline;
@@ -1321,9 +1352,8 @@ p#pseudo_converse {
 }
 div#conteneur_messages {
 	position: relative;
-	width: 800px;
-	top: -60px;
-	height: 500px;
+	min-height: 500px;
+	height: auto;
 	margin: auto;
 }
 .emoticons {

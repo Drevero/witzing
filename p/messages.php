@@ -61,9 +61,10 @@ $req_lus->execute(array(
 <form name="message" id="message" action="" onsubmit="envois_mp('<?php echo $identifiant_salon; ?>', document.getElementById('cont_message').value);return false;">
 	<p id="texte_infos_msg"></p>
 	<input type="text" maxlength="500" onclick="msg_lu('<?php echo $identifiant_salon; ?>');" placeholder="Envoyer un message à <?php echo htmlspecialchars($info_membre['pseudo']); ?>" id="cont_message" onkeyup="verif_clavier('<?php echo $identifiant_salon; ?>');"/>
+	<img src="../data/emoticons/smile2.png" onclick="boite_smiley('cont_message');" id="bt_ouvrir_smile"/>
 </form>
 <a href="messages.php?id=<?php echo $_GET['id']; ?>&amp;archive" id="archive_lien">Archive</a>
-<script type="text/javascript" src="../data/witzing.js"></script>
+<script type="text/javascript" src="../data/witzing.php"></script>
 <script>
 message_salon('<?php echo $identifiant_salon; ?>');
 </script>
@@ -104,20 +105,20 @@ while($messages=$req_messages->fetch())
 	if($messages['id_auteur']!=$_SESSION['id_membre'])
 	{
 	?>
-	<div class="cadre_droite">
-		<a href="index.php?id=<?php echo $messages['id_auteur']; ?>"><img src="<?php echo htmlspecialchars($auteur['avatar']); ?>" alt="avatar" class="avat_msg_droite"/></a>
-		<img src="../data/style/fleche_droite.png" alt="fleche_droite" class="fleche_droite"/>
-		<p class="texte_msg_droite"><?php echo emoticons(linkeur(citeur_mm(hashtageur(htmlspecialchars($messages['contenu']))))); ?> <span class="date_texte"><?php echo $messages['date_message']; ?></span></p>
+	<div class="cadre_msg">
+		<a href="index.php?id=<?php echo $messages['id_auteur']; ?>"><img src="<?php echo htmlspecialchars($auteur['avatar']); ?>" alt="avatar" class="avat_msg avat_msg_droite"/></a>
+		<p class="date_texte date_texte_droite"><?php echo $messages['date_message']; ?></p>
+		<p class="texte_msg texte_msg_droite"><?php echo emoticons(linkeur(citeur_mm(hashtageur(htmlspecialchars($messages['contenu']))))); ?></p>
 	</div>
 	<?php
 	}
 	else
 	{
 	?>
-	<div class="cadre_gauche">
+	<div class="cadre_msg">
 		<a href="index.php?id=<?php echo $messages['id_auteur']; ?>"><img src="<?php echo htmlspecialchars($auteur['avatar']); ?>" alt="avatar" class="avat_msg"/></a>
-		<img src="../data/style/fleche_gauche.png" alt="fleche_gauche" class="fleche_gauche"/>
-		<p class="texte_msg"><span class="date_texte"><?php echo $messages['date_message']; ?></span> <?php echo emoticons(linkeur(citeur_mm(hashtageur(htmlspecialchars($messages['contenu']))))); ?></p>
+		<p class="date_texte"><?php echo $messages['date_message']; ?></p>
+		<p class="texte_msg"><?php echo emoticons(linkeur(citeur_mm(hashtageur(htmlspecialchars($messages['contenu']))))); ?></p>
 	</div>
 	<?php
 	}
@@ -125,7 +126,7 @@ while($messages=$req_messages->fetch())
 }
 $req_messages->closeCursor();
 $limite_statut_plus=($limite_statut+4);
-?><div class="cadre_droite"> <?php if($limite_statut<$nmb_msg['nmb_msg']) { ?><a href="messages.php?id=<?php echo $_GET['id']; ?>&amp;archive&amp;page=<?php echo $limite_statut_plus; ?>#afficher_plus_msg"><?php } ?><input type="button" <?php if($limite_statut>=$nmb_msg['nmb_msg']) { ?>class="pas_afficher"<?php } ?> value="Afficher plus" id="afficher_plus_msg"/><?php if($limite_statut<$nmb_msg['nmb_msg']) { ?></a><?php } ?><a href="messages.php?id=<?php echo $_GET['id']; ?>"><input type="button" value="Retour" id="bt_retour_discu"/></a></div>
+?><?php if($limite_statut<$nmb_msg['nmb_msg']) { ?><a href="messages.php?id=<?php echo $_GET['id']; ?>&amp;archive&amp;page=<?php echo $limite_statut_plus; ?>#afficher_plus_msg"><?php } ?><input type="button" <?php if($limite_statut>=$nmb_msg['nmb_msg']) { ?>class="pas_afficher"<?php } ?> value="Afficher plus" id="afficher_plus_msg"/><?php if($limite_statut<$nmb_msg['nmb_msg']) { ?></a><?php } ?><a href="messages.php?id=<?php echo $_GET['id']; ?>"><input type="button" value="Retour" id="bt_retour_discu"/></a>
 </div>
 <script type="text/javascript" src="../data/witzing.php"></script>
 <?php

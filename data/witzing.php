@@ -2,6 +2,9 @@
 header("Content-type: text/javascript");
 header("Cache-Control: no-cache, must-revalidate");
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
+$liste_emoticons=Array('smile.png', 'sad.png', 'shock.png', 'embarrassed.png', 'good.png', 'laugh.png', 'love.png', 'mail.png', 'meeting.png', 'neutral.png', 'poop.png', 'present.png', 'quiet.png', 'rotfl.png', 'sick.png', 'sleepy.png', 'smile-big.png', 'sweat.png', 'tongue.png', 'victory.png', 'weep.png', 'wink.png', 'sun.png', 'question.png', 'bad.png', 'msn.png', 'car.png', 'knife.png', 'dog.png', 'beat-up.png', 'search.png', 'silly.png', 'shout.png', 'confused.png', 'party.png', 'worship.png', 'mad-tongue.png', 'musical-note.png', 'bashful.png', 'cat.png', 'sheep.png', 'msn-busy.png', 'star.png', 'angry.png', 'rose.png', 'desire.png', 'rain.png', 'beauty.png', 'goat.png', 'ghost.png', 'soldier.png', 'bomb.png', 'moon.png', 'doh.png', 'cloudy.png', 'struggle.png', 'go-away.png', 'island.png', 'devil.png', 'snail.png', 'rainbow.png', 'plate.png', 'in-love.png', 'call-me.png', 'eat.png', 'beer.png', 'boy.png', 'can.png', 'excruciating.png', 'jump.png', 'pizza.png', 'cake.png', 'curl-lip.png', 'drool.png', 'sigarette.png', 'hammer.png', 'pissed-off.png', 'eyeroll.png', 'secret.png', 'handcuffs.png', 'mean.png', 'monkey.png', 'vampire.png', 'terror.png', 'arrogant.png', 'camera.png', 'umbrella.png', 'skywalker.png', 'nailbiting.png', 'clover.png', 'bye.png', 'tv.png', 'disdain.png', 'kiss.png', 'cow.png', 'msn-away.png', 'lying.png', 'phone.png', 'airplane.png', 'glasses-nerdy.png', 'hug-left.png', 'waiting.png', 'hug-right.png', 'angel.png', 'act-up.png', 'clock.png', 'yin-yang.png', 'bowl.png', 'lashes.png', 'foot-in-mouth.png', 'girl.png', 'dance.png', 'doctor.png', 'clown.png', 'tremble.png', 'giggle.png', 'glasses-cool.png', 'chicken.png', 'sarcastic.png', 'peace.png', 'hypnotized.png', 'moneymouth.png', 'yawn.png', 'liquor.png', 'film.png', 'snowman.png', 'starving.png', 'drink.png', 'clap.png', 'snicker.png', 'skeleton.png', 'curse.png', 'msn_online.png', 'handshake.png', 'coffee.png', 'qq.png', 'lamp.png', 'blowkiss.png', 'rose-dead.png', 'soccerball.png', 'thunder.png', 'hungry.png', 'cowboy.png', 'brb.png', 'pray.png', 'disapointed.png', 'mobile.png', 'coins.png', 'shut-mouth.png', 'highfive.png', 'pill.png', 'alien.png', 'freaked-out.png', 'wilt.png', 'fingers-crossed.png', 'computer.png', 'console.png', 'smirk.png', 'pig.png', 'teeth.png', 'pumpkin.png', 'turtle.png', 'watermelon.png', 'cute.png', 'dazed.png', 'flag.png');
+$texte_emo=Array(':)', ':(', ':O', ':X', '(y)', 'xD', '<3', ':mail:', ':meeting:', ':/ ', ':caca:', ':cadeau:', ':chut:', "x\'D", ':malade:', ':dormir:', ':D', "--\'", ':P', '\o/', ":\'(", ';)', ':soleil:', ':hein:', '(n)', '[[msn]]', '[[voiture]]', '[[kanife]]', '[[chien]]', '[[ouch]]', '[[loupe]]', '[[ailleurs]]', '[[cri]]', '[[confus]]', '[[fete]]', '[[exercice]]', '[[moquerie]]', '[[musique]]', '[[repos]]', '[[chat]]', '[[chevre]]', '[[msnoccupe]]', '[[etoile]]', '[[enerve]]', '[[rose]]', '\*\.\*', '[[pluie]]', '[[beaute]]', '[[chevre2]]', '[[fantome]]', '[[soldat]]', '[[bombe]]', '[[lune]]', '[[doh]]', '[[nuageux]]', '[[pensif]]', '[[jereviens]]', '[[ile]]', '[[diable]]', '[[escargot]]', '[[arcenciel]]', '[[couvert]]', '[[coupdefoudre]]', '[[appellemoi]]', '[[manger]]', '[[biere]]', '[[homme]]', '[[canette]]', 'D:', '[[saut]]', '[[pizza]]', '[[gateau]]', '[[fausettes]]', '[[bave]]', '[[cigarette]]', '[[marteau]]', '[[nerf]]', '[[eyeroll]]', '[[secret]]', '[[menottes]]', '[[determine]]', '[[singe]]', '[[vampire]]', '[[terroriste]]', '[[arrogant]]', '[[camera]]', '[[parapluie]]', '[[pilote]]', '[[stress]]', '[[trefle]]', '[[bye]]', '[[tv]]', '[[moqueur]]', '[[bisous]]', '[[vache]]', '[[msnreviens]]', '[[menteur]]', '[[telephone]]', '[[avions]]', '[[intellectuel]]', '[[gauche]]', '[[patient]]', '[[droite]]', '[[ange]]', ':hap:', '[[heure]]', '[[yinyang]]', '[[riz]]', '[[cils]]', '[[piedsurbouche]]', '[[femme]]', '[[danse]]', '[[docteur]]', '[[clown]]', '[[tremble]]', '[[hihi]]', '[[cool]]', '[[poulet]]', '[[sarcastic]]', '[[paix]]', '[[hypnose]]', '[[argent]]', '[[baille]]', '[[liqueur]]', '[[film]]', '[[bonhommeneige]]', '[[faim]]', '[[boire]]', '[[applaudir]]', '[[clin]]', '[[squelette]]', '[[enerveplus]]', '[[msnenligne]]', '[[tchek]]', '[[cafe]]', '[[pinguin]]', '[[lampe]]', '[[douxbaiser]]', '[[rosemorte]]', '[[foot]]', '[[orage]]', '[[enerve3]]', '[[cowboy]]', '[[brb]]', '[[prier]]', '[[malenpoint]]', '[[mobile]]', '[[coints]]', '[[shadup]]', '[[tape5]]', '[[pillule]]', '[[alien]]', '[[enerve4]]', '[[timide]]', '[[croise]]', '[[ordinateur]]', '[[console]]', '[[smirk]]', '[[cochon]]', '[[dents]]', '[[halloween]]', '[[tortue]]', '[[melons]]', '[[meugnon]]', '[[dazed]]', '[[usa]]');
+
 ?>
 /*
 Witzing Copyright (C) 2014 Rémi Duplé sous les termes de la license GNU GPL version 3 (voir le fichier "licence.txt")
@@ -29,6 +32,27 @@ function getXMLHttpRequest()
 	}
 	
 	return xhr;
+}
+function boite_smiley(champ)
+{
+	document.getElementById('lightbox_img').style.display='none';
+	document.getElementById('liste_smile').style.display='block';
+	document.getElementById('lightbox').style.display='block';
+	var smiley=[<?php for($i=0;$i<count($liste_emoticons);$i++) { if($i!=count($liste_emoticons)-1) { echo '\'' . $liste_emoticons[$i] . '\', '; } else { echo '\'' . $liste_emoticons[$i] . '\''; } } ?>];
+	var smiley_code=[<?php for($i=0;$i<count($texte_emo);$i++) { if($i!=count($texte_emo)-1) { echo '\'' . $texte_emo[$i] . '\', '; } else { echo '\'' . $texte_emo[$i] . '\''; } } ?>];
+	document.getElementById('liste_smile').innerHTML='';
+	for(var i=0;i<smiley.length;i++)
+	{
+		var li=document.createElement('li');
+		li.innerHTML='<img src="../data/emoticons/' + smiley[i] + '" onclick="ajout_smiley(\'' + champ + '\', \'' + smiley_code[i] + '\');"/>';
+		document.getElementById('liste_smile').appendChild(li);
+	}
+}
+function ajout_smiley(champ, code)
+{
+	document.getElementById(champ).value+=' ' + code + ' ';
+	document.getElementById(champ).focus();
+	lightbox('', false);
 }
 function changer_fond()
 {
@@ -141,6 +165,8 @@ function lightbox(url, stat)
 {
 	if(stat)
 	{
+		document.getElementById('lightbox_img').style.display='block';
+		document.getElementById('liste_smile').style.display='none';
 		document.getElementById('lightbox').style.display='block';
 		document.getElementById('lightbox_img').src=url;
 	}
@@ -314,11 +340,11 @@ function message_salon(salon)
 				var e=(i-1);
 				if(ndom.getElementsByTagName('message')[e].getAttribute('align')=='gauche')
 				{
-					document.getElementById('conteneur_messages').innerHTML+='<div class="cadre_gauche"><a href="index.php?id=' + ndom.getElementsByTagName('message')[e].getAttribute('id_auteur') + '"><img src="' + ndom.getElementsByTagName('message')[e].getAttribute('avatar') + '" alt="avatar" class="avat_msg"/></a><img src="../data/style/fleche_gauche.png" alt="fleche_gauche" class="fleche_gauche"/><p class="texte_msg"><span class="date_texte">' + ndom.getElementsByTagName('message')[e].getAttribute('date') + ' </span>' + ndom.getElementsByTagName('message')[e].getAttribute('contenu') + '</p></div>';
+					document.getElementById('conteneur_messages').innerHTML+='<div class="cadre_msg"><a href="index.php?id=' + ndom.getElementsByTagName('message')[e].getAttribute('id_auteur') + '"><img src="' + ndom.getElementsByTagName('message')[e].getAttribute('avatar') + '" alt="avatar" class="avat_msg"/></a><p class="date_texte">' + ndom.getElementsByTagName('message')[e].getAttribute('date') + ' </p><p class="texte_msg">' + ndom.getElementsByTagName('message')[e].getAttribute('contenu') + '</p></div>';
 				}
 				else
 				{
-					document.getElementById('conteneur_messages').innerHTML+='<div class="cadre_droite"><a href="index.php?id=' + ndom.getElementsByTagName('message')[e].getAttribute('id_auteur') + '"><img src="' + ndom.getElementsByTagName('message')[e].getAttribute('avatar') + '" alt="avatar" class="avat_msg_droite"/></a><img src="../data/style/fleche_droite.png" alt="fleche_droite" class="fleche_droite"/><p class="texte_msg_droite">' + ndom.getElementsByTagName('message')[e].getAttribute('contenu') + ' <span class="date_texte">' + ndom.getElementsByTagName('message')[e].getAttribute('date') + ' </span></p></div>';
+					document.getElementById('conteneur_messages').innerHTML+='<div class="cadre_msg"><a href="index.php?id=' + ndom.getElementsByTagName('message')[e].getAttribute('id_auteur') + '"><img src="' + ndom.getElementsByTagName('message')[e].getAttribute('avatar') + '" alt="avatar" class="avat_msg avat_msg_droite"/></a><p class="date_texte date_texte_droite">' + ndom.getElementsByTagName('message')[e].getAttribute('date') + ' </p><p class="texte_msg texte_msg_droite">' + ndom.getElementsByTagName('message')[e].getAttribute('contenu') + '</p></div>';
 				}
 			}
 		}
