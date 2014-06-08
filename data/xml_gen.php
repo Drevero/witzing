@@ -381,7 +381,14 @@ if($_GET['req']=='msg_salon_commun')
 		{
 			$parle_moi=1;
 		}
-		echo '<message parlemoi="' . $parle_moi . '" id_auteur="' . $messages['id_auteur'] . '" contenu="' . htmlspecialchars(emoticons(linkeur(citeur_mm(hashtageur($messages['contenu_message']))))) . '" date="' . $messages['date_message'] . '" pseudo="' . $auteur['pseudo'] . '"/>';
+		if(!$auteur['pseudo'])
+		{
+			echo '<message parlemoi="' . $parle_moi . '" id_auteur="' . $_SESSION['id_membre'] . '" contenu="' . htmlspecialchars(emoticons(linkeur(citeur_mm(hashtageur($messages['contenu_message']))))) . '" date="' . $messages['date_message'] . '" pseudo="Ancien Membre"/>';
+		}
+		else
+		{
+			echo '<message parlemoi="' . $parle_moi . '" id_auteur="' . $messages['id_auteur'] . '" contenu="' . htmlspecialchars(emoticons(linkeur(citeur_mm(hashtageur($messages['contenu_message']))))) . '" date="' . $messages['date_message'] . '" pseudo="' . $auteur['pseudo'] . '"/>';
+		}
 		$req_auteur->closeCursor();
 	}
 	$req_messages->closeCursor();
