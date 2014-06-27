@@ -1,6 +1,6 @@
 <?php
 /*
-Witzing Copyright (C) 2014 Rémi Duplé sous les termes de la license GNU GPL version 3 (voir le fichier "licence.txt")
+Witzing Copyright (C) 2014 Rémi Duplé sous les termes de la license GNU GPL version 3 (voir le fichier "LICENSE.txt")
 */
 session_start();
 if(!isset($_GET['id']) && $_GET['id']==$_SESSION['id_membre'])
