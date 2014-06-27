@@ -515,7 +515,7 @@ function cherche_notif(valeur)
 			if(ndom.getElementsByTagName('notification').length==0)
 			{
 				nombre_notif=false;
-				document.getElementById('notif_plan_conteneur').innerHTML='<p class="no_demande">Aucune Notification</p>';
+				document.getElementById('notif_plan_conteneur').innerHTML='<p class="no_demande">Aucune notification</p>';
 			}
 			else
 			{
