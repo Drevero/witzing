@@ -1,6 +1,6 @@
 <?php
 /*
-Witzing Copyright (C) 2014 Rémi Duplé sous les termes de la license GNU GPL version 3 (voir le fichier "licence.txt")
+Witzing Copyright (C) 2014 Rémi Duplé sous les termes de la license GNU GPL version 3 (voir le fichier "LICENSE.txt")
 */
 session_start();
 include('../data/bdd.php');
@@ -143,7 +143,7 @@ include('../data/bandeau.php');
 <div id="conteneur_membre">
 	<p id="parametre_compte_texte">Êtes-vous vraiment sûr(e) de vouloir clôturer votre compte ?</p>
 	<div id="conteneur_cloturation">
-		<p id="infos_cloturation">L'action de cloturer un compte est définitive et irréversible. Lors de la cloturation vous perdrez tout vos commentaires/statuts/abonnés/amis etc ...<br /><br />Si la cloturation de votre compte est dûe à un manque de maturité du projet Witzing ou à une déception relative à celui-ci, vous pouvez bien sûr me faire part de vos commentaires à cette adresse email : drevero@drevero.zz.mu.<br /><br />Pour terminer, une notification sera envoyée à tous vos abonnés/amis de votre cloturation.<br /><br />Aurevoir <?php echo htmlspecialchars($recherche['pseudo']); ?>.</p>
+		<p id="infos_cloturation">L'action de clôturer un compte est irréversible. Lors de la clôturation vous perdez tous vos commentaires, statuts, abonnés et amis...<br /><br />Dans le cas où cette clôturation est dûe à un manque de maturité du projet Witzing, vous pouvez bien sûr me faire part de vos commentaires en envoyant un message à cette adresse : drevero@drevero.zz.mu.<br /><br />Enfin, une notification sera envoyée à l'ensemble de vos abonnés et amis.<br /><br />Aurevoir <?php echo htmlspecialchars($recherche['pseudo']); ?>.</p>
 		<a href="cloturer_compte.php?oui" title="Cloturer le compte"><input type="button" value="Oui je suis sûr(e)" id="cloturer_compte_confirm"/></a>
 	</div>
 </div>

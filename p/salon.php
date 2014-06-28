@@ -1,6 +1,6 @@
 <?php
 /*
-Witzing Copyright (C) 2014 Rémi Duplé sous les termes de la license GNU GPL version 3 (voir le fichier "licence.txt")
+Witzing Copyright (C) 2014 Rémi Duplé sous les termes de la license GNU GPL version 3 (voir le fichier "LICENSE.txt")
 */
 session_start();
 include('../data/bdd.php');
@@ -32,7 +32,7 @@ if(!isset($_GET['verif']))
 ?>
 	<div id="conteneur_intro_salon">
 		<p id="parametre_compte_texte">Bienvenue à tous dans le <span id="hashtag_witz">#Salon</span></p>
-		<p id="sous_titre_salon">Vous pouvez parler librement avec toutes la communauté de Witzing, pour faire de nouvelles rencontres, débattre autour d'un sujet et bien plus encore, bon amusement ! <br/><br />Witzing en chiffres c'est <span id="nmb_inscr"><?php echo $nmb_inscr['nmb_inscr']; ?></span> inscrits et <span id="nmb_co"><?php echo $nmb_co['nmb_co']; ?></span> connectés !</p>
+		<p id="sous_titre_salon">Ici vous pouvez parler librement avec toute la communauté Witzing pour faire de nouvelles rencontres ou débattre autour d'un sujet, bon amusement ! <br/><br />Witzing en chiffres c'est <span id="nmb_inscr"><?php echo $nmb_inscr['nmb_inscr']; ?></span> inscrits et <span id="nmb_co"><?php echo $nmb_co['nmb_co']; ?></span> connectés !</p>
 		<a href="salon.php?verif" id="bouton_ouvrir_salon">Ouvrir le salon</a>
 	</div>
 <?php
