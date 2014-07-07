@@ -22,9 +22,9 @@ include('../licence_include.php');
 include('../data/bandeau.php');
 ?>
 <div id="conteneur_membre">
-	<p id="parametre_compte_texte">Bienvenue sur Witzing !</p>
+	<p id="parametre_compte_texte">Bienvenue sur Witzing</p>
 	<div id="conteneur_inscr_dernier" class="tuto_inscr">
-		<p id="texte_intro">Libre à vous maintenant de profiter pleinement d'un tout nouveau réseau social libre, si vous avez besoin d'aide n'hésitez surtout pas à m'envoyer un message <a href="index.php?id=1">@Drevero</a> !</p>
+		<p id="texte_intro">Vous pouvez dès maintenant profiter d'un tout nouveau réseau social libre, si vous avez besoin d'aide n'hésitez pas à m'envoyer un message <a href="index.php?id=1">@Drevero</a> !</p>
 		<a href="../index.php" title="Retour à la page d'accueil"><input type="button" value="Allez sur mon fil d'actu" id="annuler_compte_confirm"/></a>
 	</div>
 </div>
