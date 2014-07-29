@@ -8,12 +8,23 @@ Witzing est un réseau social 100 % libre et français (disponible sous la licen
     * Génèse
     * Philosophie
     * Objectifs
-5. **Witzing**
+2. **Witzing**
     * Caractéristiques principales
     * Distribution
     * Auteurs
 
 ## Le projet Witzing
+
+### Génèse
+Le projet Witzing est né du croisement entre le concept du réseau social et celui du logiciel libre, le résultat étant un service Web de communication sociale disponible sur http://witzing.fr/.
+
+### Philosophie
+
+La liberté constitue le coeur de Witzing et motive son développement depuis sa création car force est de constater que dans le monde de la  communication sociale sur le Web cette dernière n'est pas toujours au rendez-vous.
+
+### Objectifs
+
+Le projet Witzing a pour vocation d'offrir un service Web de communication sociale (réseau social) libre.
 
 ## Witzing
 
