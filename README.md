@@ -13,7 +13,11 @@ Witzing est un réseau social 100 % libre et français (disponible sous la licen
     * Distribution
     * Auteurs
 
-## Caractéristiques principales
+## Le projet Witzing
+
+## Witzing
+
+### Caractéristiques principales
 
 * **LIBERTÉ** : Witzing est un logiciel libre, vous pouvez l'utiliser, le modifier, le redistribuer et l'améliorer sans autres restrictions que celles stipulées par les termes de la licence [Licence Publique Générale GNU en version 3](http://www.gnu.org/licenses/gpl.txt "GNU Lesser General Public License Version 3") (GPLv3)
 * **INDÉPENDANCE** : Witzing est un réseau social indépendant, je suis libre d'innover sans aucune contraite pour vous offrir un service toujours meilleur
@@ -22,7 +26,7 @@ Witzing est un réseau social 100 % libre et français (disponible sous la licen
 * **NEUTRALITÉ** : Witzing est totalement désintérressé par vos informations personnelles
 * **LÉGÈRETÉ** : Witzing ne comporte pas de publicité.
 
-## Distribution
+### Distribution
 
 Le code source de Witzing est disponible selon les termes de la [Licence Publique Générale GNU en version 3](http://www.gnu.org/licenses/gpl.txt "GNU Lesser General Public License Version 3") (GPLv3) mais certains composants de Witzing sont placés sous d'autres termes, comme le montre la liste ci-dessous :
 
@@ -37,6 +41,6 @@ Le code source de Witzing est disponible selon les termes de la [Licence Publiqu
 * Police de caractère [Modern Pictograms](http://johncaserta.com/modern-pictograms/)  
     [SIL OPEN FONT LICENSE Version 1.1](http://scripts.sil.org/cms/scripts/page.php?item_id=OFL_web)
 
-## Auteurs
+### Auteurs
 
 La liste des contributeurs est disponible dans le fichier AUTHORS.txt.
