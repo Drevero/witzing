@@ -8,7 +8,7 @@ Witzing est un réseau social 100 % libre et français (disponible sous les term
     * Génèse
     * Philosophie
     * Objectifs
-2. **Witzing**
+2. **Informations techniques**
     * Caractéristiques principales
     * Distribution
     * Auteurs
@@ -26,7 +26,7 @@ La liberté constitue le coeur de Witzing et motive son développement depuis sa
 
 Le projet Witzing a pour vocation d'offrir un service Web de communication sociale (réseau social) libre.
 
-## Witzing
+## Informations technique
 
 ### Caractéristiques principales
 
