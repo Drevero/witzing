@@ -3,7 +3,12 @@ Création :
 
 Programmation :
     Drevero - http://witzing.fr/p/index.php?id=1
-    Chindit - http://witzing.fr/p/index.php?id=63
+    chindit - http://witzing.fr/p/index.php?id=63
 
 Rédaction :
+    Drevero - http://witzing.fr/p/index.php?id=1
     Limonclib - http://witzing.fr/p/index.php?id=115
+
+Graphisme :
+    Drevero - http://witzing.fr/p/index.php?id=1
+    Tantofu - http://witzing.fr/p/index.php?id=14
