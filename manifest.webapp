@@ -1,0 +1,26 @@
+{
+  "version": "0.2",
+  "name": "Witzing",
+  "description": "Envie d'accéder à Witzing partout, c'est désormais possible grâce à l'application pour Firefox OS",
+  "launch_path": "/index.html",
+  "icons": {
+    "16": "/img/icons/witzing-16.png",
+    "48": "/img/icons/witzing-48.png",
+    "60": "/img/icons/witzing-60.png",
+    "128": "/img/icons/witzing-128.png"
+  },
+  "developer": {
+    "name": "Drevero",
+    "url": "http://drevero.zz.mu"
+  },
+  "locales": {
+    "fr": {
+      "description": "Envie d'accéder à Witzing partout, c'est désormais possible grâce à l'application pour Firefox OS"
+    },
+    "en": {
+      "description": "Want to access at Witzing everywhere ? Install the application "
+    }
+  },
+  "chrome": { "navigation": true },
+  "default_locale": "fr"
+}
