@@ -26,7 +26,7 @@ La liberté constitue le coeur de Witzing et motive son développement depuis sa
 
 Le projet Witzing a pour vocation d'offrir un service Web de communication sociale (réseau social) libre.
 
-## Informations technique
+## Informations techniques
 
 ### Caractéristiques principales
 
