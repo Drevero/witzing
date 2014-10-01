@@ -1,0 +1,80 @@
+div.publicateur_comment {
+	border: 0px solid transparent;
+	background: transparent;
+}
+div.plug_comment {
+	background: transparent;
+	border: 0px solid transparent;
+}
+div.comment_bulle {
+	background: transparent;
+	border: 0px solid transparent;
+}
+#comment_input_text.input_comment {
+	background: transparent;
+	border: transparent;
+	width: 100%;
+}
+span.date_texte {
+	color: white;
+}
+span.repondre_membre {
+	color: white;
+}
+p#bt_plus_info_mm {
+	color: white;
+}
+p#pseudo_info a {
+	color: white;
+}
+p#monfil {
+	color: white;
+}
+div.post {
+	background: transparent;
+	border: transparent;
+}
+div.contenu_post_edit {
+	background: transparent;
+}
+p.ouvrir_post a {
+	color: white;
+}
+#fleche_fenetre_stat {
+	display: none !important;
+}
+#fenetre_stat {
+	background: transparent !important;
+	border: 0px solid transparent !important;
+}
+#fenetre_stat a {
+	color: white;
+}
+.ecriture_statut {
+	background: transparent !important;
+	border: transparent !important;
+}
+#post_text {
+	background: transparent;
+	border: transparent;
+	max-width: 100%;
+	min-width: 100%;
+	width: 100%;
+}
+.publier_post {
+	background: transparent !important;
+	border: transparent !important;
+	color: white !important;
+}
+.photo_post_bt {
+	background: transparent !important;
+	border: transparent !important;
+	color: white;
+}
+#boite_plus_info_mm {
+	background: transparent !important;
+	border: transparent !important;
+}
+#boite_plus_info_mm p {
+	color: black !important;
+}

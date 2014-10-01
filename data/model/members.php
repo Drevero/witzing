@@ -1,0 +1,174 @@
+<?php
+/* 
+members.php contient toutes les fonctions essentielles à la gestion d'un compte membre tel que la suppression, la création, la modification etc ...
+*/
+function create_account($mail, $username, $password, $bdd)
+{
+	if(strlen($username)>3 && strlen($password)>3  && !preg_match('# #isU', $username) && !preg_match('#>#isU', $username) && preg_match('#(.+)@(.+)\.(.+)#', $mail))
+	{
+		$req_membre=$bdd->prepare('SELECT pseudo FROM membres WHERE pseudo = :pseudo');
+		$req_membre->execute(array(
+			'pseudo' => $username,
+			));
+		$membre=$req_membre->fetch();
+		$req_mail=$bdd->prepare('SELECT mail FROM membres WHERE mail = :mail');
+		$req_mail->execute(array(
+			'mail' => $mail,
+			));
+		$mail2=$req_mail->fetch();
+		if($membre || $mail2)
+		{
+			if($membre)
+			{
+				return false;
+			}
+			if($mail2)
+			{
+				return false;
+			}
+		}
+		else
+		{
+			$req_insert_mm=$bdd->prepare('INSERT INTO membres (pseudo, passe, mail, avatar, date_inscription, badges, amis, suivis, aime, attente_amis) VALUES(:pseudo, :passe, :mail, :avatar, NOW(), :badges, :amis, :suivis, :aime, :attente_amis)');
+			$req_insert_mm->execute(array(
+				'pseudo' => $username,
+				'passe' => $password,
+				'mail' => $mail,
+				'avatar' => 'data/style/portrait_defaut.png',
+				'badges' => 'a:1:{i:0;s:1:"3";}',
+				'amis' => 'a:0:{}',
+				'suivis' => 'a:0:{}',
+				'aime' => 'a:0:{}',
+				'attente_amis' => 'a:1:{i:0;s:1:"1";}',
+				));
+			$recup_id=$bdd->prepare('SELECT id_membre FROM membres WHERE pseudo = :membre');
+			$recup_id->execute(array(
+				'membre' => $username,
+				));
+			$recup=$recup_id->fetch();
+			$_SESSION['id_membre']=$recup['id_membre'];
+			$req_insert_notif=$bdd->prepare('INSERT INTO notifications (membre_notif, contenu, lien, avatar, lu) VALUES(:membre_notif, :contenu, :lien, :avatar, 0)');
+			$req_insert_notif->execute(array(
+				'membre_notif' => $recup['id_membre'],
+				'lien' => 'index.php',
+				'contenu' => 'Vous avez reçus votre premier badge !',
+				'avatar' => '../data/style/logo.png',
+				));
+			return true;
+		}
+	}
+}
+function mod_account($mail, $username, $password, $avatar=false, $bdd)
+{
+	
+}
+function delete_account($id, $bdd)
+{
+	
+}
+function getUserInfo($id, $bdd)
+{
+	$req=$bdd->prepare('SELECT * FROM membres WHERE id_membre = :id');
+	$req->execute(array(
+		'id' => $id,
+		));
+	$result=$req->fetch();
+	if($result)
+	{
+		return $result;
+	}
+}
+function online($id, $bdd)
+{
+	$req=$bdd->prepare('SELECT derniere_activite FROM membres WHERE id_membre = :id_membre');
+	$req->execute(array(
+		'id_membre' => $id,
+		));
+	$mm_co=$req->fetch();
+	$mm_co['derniere_activite']=preg_replace_callback('#(.+)-(.+)-(.+) (.+):(.+):(.+)#i', 'callback_mmco', $mm_co['derniere_activite']);
+	return $mm_co['derniere_activite'];
+}
+function callback_mmco($matches)
+{
+	if($matches[3]==date('d') && $matches[2]==date('m') && $matches[1]=date('Y') && $matches[4]==date('H') && $matches[5]==date('i'))
+	{
+		return true;
+	}
+	else
+	{
+		if($matches[3]==date('d') && $matches[2]==date('m') && $matches[1]=date('Y') && $matches[4]==date('H') && $matches[5]==(date('i')-1))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+}
+function ismyFriend($id, $bdd)
+{
+	$info=getUserInfo($_SESSION['id_membre'], $bdd);
+	$info_friend=unserialize($info['amis']);
+	if(in_array($_SESSION['id_membre'], $info_friend))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+function member_exist($id, $bdd)
+{
+	$req=$bdd->prepare('SELECT id_membre FROM membres WHERE id_membre = :id');
+	$req->execute(array(
+		'id' => $id,
+		));
+	$result=$req->fetch();
+	if($result)
+	{
+		return true;
+	}
+}
+function member_name($id, $bdd)
+{
+	$req=$bdd->prepare('SELECT pseudo FROM membres WHERE id_membre = :id');
+	$req->execute(array(
+		'id' => $id,
+		));
+	$result=$req->fetch();
+	if($result)
+	{
+		return $result['pseudo'];
+	}
+}
+function connect($mail, $password, $bdd)
+{
+	$req_con=$bdd->prepare('SELECT * FROM membres WHERE mail = :mail and passe = :passe');
+	$req_con->execute(array(
+		'mail' => $mail,
+		'passe' => $password,
+		));
+	$result=$req_con->fetch();
+	if($result)
+	{
+		$_SESSION['id_membre']=$result['id_membre'];
+		$req_con=$bdd->prepare('UPDATE membres SET dernier_activite = NOW(), derniere_con = NOW() WHERE mail = :mail AND passe = :passe');
+		$req_con->execute(array(
+			'mail' => $mail,
+			'passe' => $password,
+			));
+		$req_con->closeCursor();
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+function deconnect()
+{
+	session_destroy();
+}
+?>
