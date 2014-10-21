@@ -6,6 +6,7 @@ include_once('data/model/tools.php');
 $info_user=getUserInfo($_GET['id'], $bdd);
 $badges_me=unserialize($info_user['badges']);
 $amis=unserialize($info_user['amis']);
+$mps=getUserMps($_GET['id'], $bdd);
 $abonnes=unserialize($info_user['suivis']);
 $aime=unserialize($info_user['aime']);
 $liste_demande=unserialize($info_user['attente_amis']);

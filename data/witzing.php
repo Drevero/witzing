@@ -87,7 +87,7 @@ function supr_post(id)
 	xhr.onreadystatechange = function() {
 		if(xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0))
 		{
-			document.getElementById('conteneur_droite').removeChild(document.getElementById('post' + id));
+			document.getElementById('conteneur_membre').removeChild(document.getElementById('post' + id));
 		}
 	};
 	xhr.open('GET', 'index.php?page=ajax&id_supr_post=' + id, true);

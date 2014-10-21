@@ -78,6 +78,18 @@ function getUserInfo($id, $bdd)
 		return $result;
 	}
 }
+function getUserMps($id, $bdd)
+{
+	$req=$bdd->prepare('SELECT COUNT(*) AS nmb_msg FROM messages_perso WHERE id_auteur = :id');
+	$req->execute(array(
+		'id' => $id,
+		));
+	$result=$req->fetch();
+	if($result)
+	{
+		return $result['nmb_msg'];
+	}
+}
 function online($id, $bdd)
 {
 	$req=$bdd->prepare('SELECT derniere_activite FROM membres WHERE id_membre = :id_membre');

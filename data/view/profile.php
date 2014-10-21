@@ -21,14 +21,57 @@ if($info_user['theme_fil']!=0)
 
 <link rel="icon" href="data/style/logo.png" type="image/png" />
 </head>
-<body<?php if($info_membre['fond_fil']!='') { echo ' style="background-image: url(\'' . $info_user['fond_fil'] . '\');"'; } ?>>
+<body>
 <?php
 include('data/view/bandeau.php');
 ?>
 <div id="conteneur_membre">
-	<?php include('data/view/info_profile.php'); ?>
-	<div id="conteneur_droite">
-		<p id="pseudo_info"><a href="index.php?id=<?php echo $info_membre['id_membre']; ?>"><?php echo htmlspecialchars($info_user['pseudo']); ?></a><img <?php if(online($_GET['id'], $bdd) || $_GET['id']==$_SESSION['id_membre']) { echo 'src="data/style/led1.png" title="Connecté"'; } else { echo 'src="data/style/led0.png" title="Déconnecté"'; } ?> class="statut_con"/><?php if(admin_check($bdd)) { ?><a href="javascript:;" onclick="if(confirm('Êtes-vous vraiment sûr de vouloir faire cela ?')) { resp_page('index.php?supr_membre=<?php echo htmlspecialchars($_GET['id']); ?>'); }" class="supr_compte_mm" title="Supprimer ce membre"> (supr)</a><?php } ?></p>
+	<div id="banner_member" style="background: url('<?php echo $info_user['fond_fil']; ?>');">
+		<img src="<?php echo htmlspecialchars($info_user['avatar']); ?>" alt="avatar" id="avatar_banner"/>
+		<p id="pseudo_info"><a href="index.php?id=<?php echo $info_membre['id_membre']; ?>"><?php echo htmlspecialchars($info_user['pseudo']); ?></a>
+		<div id="content_social">
+			<p id="social_markers"><a href="#"><?php echo count($abonnes); ?> abonné<?php if(count($abonnes)>1) { echo 's'; } ?></a><a href="#" class="space_btw_marker"><?php echo count($aime); ?> aime<?php if(count($aime)>1) { echo 'nt'; } ?></a><a href="#" class="space_btw_marker"><?php echo count($amis); ?> ami<?php if(count($amis)>1) { echo 's'; } ?></a><a href="#" class="space_btw_marker"><?php echo $mps; ?> message<?php if($mps>1) { echo 's'; } ?></a></p></div>
+			<div id="social_buttons"><p id="friends_button" onclick="alert('caca');">f</p><div class="separator_band_buttons"></div><p id="follow_button">Je m'abonne</p></div>
+		</div>
+		<div class="title_content_ban whats_new">
+			<p>Quoi de neuf ?</p>
+		</div>
+		<div id="write_post">
+			<form method="post" id="post_form" enctype="multipart/form-data">
+				<textarea name="post_text" id="post_text" maxlength="800" placeholder="Partagez vos envies, vos emotions ..."></textarea>
+				<input type="hidden" value="<?php echo $info_user['id_membre'] ?>" name="destinataire"/>
+				<input type="file" id="fichier_photo" name="fichier_photo" onchange="visual_photo_statut();" accept="image/*"/>
+				<input type="hidden" id="photo_change" name="photo_change" value="0"/>
+				<img src="" id="apercu_photo"/>
+				<div id="options_post">
+					<input type="button" value="A" onclick="changer_photo_statut();" class="photo_post_bt"/>
+					<input type="button" value="Publier" onclick="verif_post();" class="publier_post"/>
+				</div>
+			</form>
+		</div>
+		<?php
+		$status=getUserStatus($_GET['id'], $limit=10, $bdd);
+		for($i=0;$i<count($status);$i++)
+		{
+			$likes_stats=unserialize($status[$i]['aime_statut']);
+			$notlikes_stats=unserialize($status[$i]['aime_pas_statut']);
+			$member_status=getUserInfo($status[$i]['ecrivain_statut'], $bdd);
+			?>
+		<div class="post" id="post<?php echo $status[$i]['id_statut']; ?>">
+			<div class="title_content_ban post_ban">
+				<img src="<?php echo htmlspecialchars($member_status['avatar']); ?>"/>
+				<p class="author"><?php echo htmlspecialchars($member_status['pseudo']); ?></p>
+				<p class="date"><?php $status[$i]['date_statut']=preg_replace_callback('#(.+)-(.+)-(.+) (.+):(.+):(.+)#i', 'dateur', $status[$i]['date_statut']);echo $status[$i]['date_statut']; ?></p>
+				<p class="trash_post" onclick="supr_post('<?php echo $status[$i]['id_statut']; ?>');">I</p>
+			</div>
+			<div class="content_post">
+				<p><?php echo markdown(photo_statut(emoticons(linkeur(embed(hashtageur(citeur_mm(nl2br(htmlspecialchars($status[$i]['contenu_statut']))))))))); ?></p>
+			</div>
+		</div>
+		<?php
+		}
+		?>
+		<?php /*
 		<p id="bt_plus_info_mm"<?php if($info_user['id_membre']==$_SESSION['id_membre']) { echo ' class="moi" '; } ?> onclick="plus_moins_info(<?php if($info_user['id_membre']==$_SESSION['id_membre']) { echo 'true'; } ?>);">Plus d'informations +</p>
 		<div id="boite_plus_info_mm">
 			<p>Inscrit <?php $info_user['date_inscription']=preg_replace_callback('#(.+)-(.+)-(.+) (.+):(.+):(.+)#i', 'dateur', $info_user['date_inscription']);echo $info_user['date_inscription']; ?></p>
@@ -49,7 +92,7 @@ include('data/view/bandeau.php');
 			?>
 			</p>
 		</div>
-		<?php
+		<?php 
 		if($_GET['id']!=$_SESSION['id_membre'])
 		{
 		?>
@@ -111,7 +154,7 @@ include('data/view/bandeau.php');
 				<p class="texte_post_cont"><?php echo markdown(photo_statut(emoticons(linkeur(embed(hashtageur(citeur_mm(nl2br(htmlspecialchars($status[$i]['contenu_statut']))))))))); ?></p>
 			</div>
 			<?php
-		}
+		} */
 		?>
 </div>
 <script type="text/javascript" src="data/witzing.php"></script>
