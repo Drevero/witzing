@@ -62,7 +62,7 @@ include('data/view/bandeau.php');
 				<img src="<?php echo htmlspecialchars($member_status['avatar']); ?>"/>
 				<p class="author"><?php echo htmlspecialchars($member_status['pseudo']); ?></p>
 				<p class="date"><?php $status[$i]['date_statut']=preg_replace_callback('#(.+)-(.+)-(.+) (.+):(.+):(.+)#i', 'dateur', $status[$i]['date_statut']);echo $status[$i]['date_statut']; ?></p>
-				<p class="trash_post" onclick="supr_post('<?php echo $status[$i]['id_statut']; ?>');">I</p>
+				<?php if($status[$i]['ecrivain_statut']==$_SESSION['id_membre'] || $recherche['admin']=='1') { ?><p class="trash_post" onclick="supr_post('<?php echo $status[$i]['id_statut']; ?>');">I</p><?php } ?>
 			</div>
 			<div class="content_post">
 				<p><?php echo markdown(photo_statut(emoticons(linkeur(embed(hashtageur(citeur_mm(nl2br(htmlspecialchars($status[$i]['contenu_statut']))))))))); ?></p>
