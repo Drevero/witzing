@@ -28,14 +28,18 @@ include('data/view/bandeau.php');
 <div id="conteneur_membre">
 	<div id="banner_member" style="background: url('<?php echo $info_user['fond_fil']; ?>');">
 		<img src="<?php echo htmlspecialchars($info_user['avatar']); ?>" alt="avatar" id="avatar_banner"/>
-		<p id="pseudo_info"><a href="index.php?id=<?php echo $info_membre['id_membre']; ?>"><?php echo htmlspecialchars($info_user['pseudo']); ?></a>
+		<p id="pseudo_info"><a href="index.php?page=profile&id=<?php echo $info_user['id_membre']; ?>"><?php echo htmlspecialchars($info_user['pseudo']); ?></a>
 		<div id="content_social">
 			<p id="social_markers"><a href="#"><?php echo count($abonnes); ?> abonné<?php if(count($abonnes)>1) { echo 's'; } ?></a><a href="#" class="space_btw_marker"><?php echo count($aime); ?> aime<?php if(count($aime)>1) { echo 'nt'; } ?></a><a href="#" class="space_btw_marker"><?php echo count($amis); ?> ami<?php if(count($amis)>1) { echo 's'; } ?></a><a href="#" class="space_btw_marker"><?php echo $mps; ?> message<?php if($mps>1) { echo 's'; } ?></a></p></div>
-			<div id="social_buttons"><p id="friends_button" onclick="alert('caca');">f</p><div class="separator_band_buttons"></div><p id="follow_button">Je m'abonne</p></div>
+			<?php if($info_user['id_membre']!=$_SESSION['id_membre']) { ?><div id="social_buttons"><p id="friends_button" onclick="friend_action(<?php echo $info_membre['id_membre']; ?>);">f</p><div class="separator_band_buttons"></div><p id="follow_button">Je m'abonne</p></div><?php } ?>
 		</div>
-		<div class="title_content_ban whats_new">
-			<p>Quoi de neuf ?</p>
+		<div class="title_content_ban whats_new<?php if(!ismyFriend($_GET['id'], $bdd) && $_GET['id']!=$_SESSION['id_membre']) { echo ' hide'; } ?>">
+			<p><?php if($_GET['id']==$_SESSION['id_membre']) { echo 'Quoi de neuf ?'; } elseif(ismyFriend($_GET['id'], $bdd)) { echo 'Ecrire sur son fil d\'actu'; } else { echo htmlspecialchars($info_user['pseudo']) . ' n\'est pas votre amis, vous ne pouvez pas publier sur son fil.'; } ?></p>
 		</div>
+		<?php
+		if(ismyFriend($_GET['id'], $bdd) || $_GET['id']==$_SESSION['id_membre'])
+		{
+		?>
 		<div id="write_post">
 			<form method="post" id="post_form" enctype="multipart/form-data">
 				<textarea name="post_text" id="post_text" maxlength="800" placeholder="Partagez vos envies, vos emotions ..."></textarea>
@@ -50,22 +54,36 @@ include('data/view/bandeau.php');
 			</form>
 		</div>
 		<?php
+		}
 		$status=getUserStatus($_GET['id'], $limit=10, $bdd);
 		for($i=0;$i<count($status);$i++)
 		{
 			$likes_stats=unserialize($status[$i]['aime_statut']);
 			$notlikes_stats=unserialize($status[$i]['aime_pas_statut']);
 			$member_status=getUserInfo($status[$i]['ecrivain_statut'], $bdd);
+			$comments=getStatusComments($status[$i]['id_statut'], $bdd);
 			?>
 		<div class="post" id="post<?php echo $status[$i]['id_statut']; ?>">
 			<div class="title_content_ban post_ban">
-				<img src="<?php echo htmlspecialchars($member_status['avatar']); ?>"/>
-				<p class="author"><?php echo htmlspecialchars($member_status['pseudo']); ?></p>
+				<a href="index.php?page=profile&id=<?php echo $member_status['id_membre']; ?>"><img src="<?php echo htmlspecialchars($member_status['avatar']); ?>"/>
+				<a href="index.php?page=profile&id=<?php echo $member_status['id_membre']; ?>"><p class="author"><?php echo htmlspecialchars($member_status['pseudo']); ?></p></a>
 				<p class="date"><?php $status[$i]['date_statut']=preg_replace_callback('#(.+)-(.+)-(.+) (.+):(.+):(.+)#i', 'dateur', $status[$i]['date_statut']);echo $status[$i]['date_statut']; ?></p>
-				<?php if($status[$i]['ecrivain_statut']==$_SESSION['id_membre'] || $recherche['admin']=='1') { ?><p class="trash_post" onclick="supr_post('<?php echo $status[$i]['id_statut']; ?>');">I</p><?php } ?>
+				<?php if($status[$i]['ecrivain_statut']==$_SESSION['id_membre'] || $recherche['admin']=='1') { ?><p class="trash_post" onclick="supr_post('<?php echo $status[$i]['id_statut']; ?>');">I</p><?php } ?><p onclick="unlike_stats(<?php echo $status[$i]['id_statut']; ?>);" class="unlike_post<?php if(in_array($_SESSION['id_membre'], $notlikes_stats)) { echo ' clicked'; } ?>" id="unlike_stats<?php echo $status[$i]['id_statut']; ?>">L</p><p class="like_post<?php if(in_array($_SESSION['id_membre'], $likes_stats)) { echo ' clicked'; } ?>" id="like_stats<?php echo $status[$i]['id_statut']; ?>" onclick="like_stats(<?php echo $status[$i]['id_statut']; ?>);">l</p>
 			</div>
 			<div class="content_post">
 				<p><?php echo markdown(photo_statut(emoticons(linkeur(embed(hashtageur(citeur_mm(nl2br(htmlspecialchars($status[$i]['contenu_statut']))))))))); ?></p>
+				<div class="comment_zone">
+					<div class="zone_like">
+						<p><?php if(count($comments)>0) { ?><span class="comments_nmb" onclick="show_comments(<?php echo $status[$i]['id_statut']; ?>);this.innerHTML='Actualiser '">Voir les commentaires </span>&nbsp;<?php } ?><b id="text_like<?php echo $status[$i]['id_statut']; ?>"><?php echo count($likes_stats); ?></b> personne<?php if(count($like_stats)>1) { echo 's'; } ?> aime<?php if(count($like_stats)>1) { echo 'nt'; } ?></span> et <span class="unlike_button"><b id="unlike_text<?php echo $status[$i]['id_statut']; ?>"><?php echo count($notlikes_stats); ?></b> n'aime<?php if(count($notlikes_stats)>1) { echo 'nt'; } ?> pas</p>
+					</div>
+					<div id="conteneur_comment<?php echo $status[$i]['id_statut']; ?>">
+					</div>
+					<div class="write_comment">
+						<img src="<?php echo $info_me['avatar']; ?>" alt="avatar_comment" class="avatar_comment"/>
+						<textarea class="write_comment_textarea" id="textarea_comment<?php echo $status[$i]['id_statut']; ?>" maxlength="200" placeholder="Ecrivez un commentaire ..."></textarea>
+						<input class="publier_comment" value="e" onclick="send_comment(<?php echo $status[$i]['id_statut']; ?>);"/>
+					</div>
+				</div>
 			</div>
 		</div>
 		<?php

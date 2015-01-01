@@ -16,7 +16,11 @@ $badges_nom=array('L\'experimenteur, j\'ai participé à une session de bêta-te
 $name_profile=($_GET['id']==$_SESSION['id_membre']) ? 'Mon fil d\'actu' : htmlspecialchars($info_user['pseudo']);
 if(isset($_POST['post_text']) && isset($_POST['destinataire']) && isset($_FILES['fichier_photo']) && isset($_POST['photo_change']) && strlen($_POST['post_text'])<=900)
 {
-	create_status($_POST['post_text'], $_POST['destinataire'], $_FILES['fichier_photo'], $_POST['photo_change'], $bdd);
+	$bool_id=create_status($_POST['post_text'], $_POST['destinataire'], $_FILES['fichier_photo'], $_POST['photo_change'], $bdd);
+	if($bool_id)
+	{
+		header('Location: #post' . $bool_id); // ¡ FIX !
+	}
 }
 if(!isset($_GET['id']))
 {

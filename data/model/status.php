@@ -88,7 +88,7 @@ function create_status($content, $id, $image, $stat_img, $bdd)
 				}
 			}
 		}
-		return true;
+		return $id;
 	}
 	else
 	{
@@ -105,6 +105,10 @@ function delete_status($id, $bdd)
 	if($result['ecrivain_statut']==$_SESSION['id_membre'] || admin_check($bdd))
 	{
 		$req=$bdd->prepare('DELETE FROM statuts WHERE id_statut = :id');
+		$req->execute(array(
+			'id' => $id,
+		));
+		$req=$bdd->prepare('DELETE FROM comment_statuts WHERE id_statut_comment = :id');
 		$req->execute(array(
 			'id' => $id,
 		));
@@ -193,7 +197,7 @@ function unlike_status($id, $bdd)
 	}
 	return $return_data;
 }
-// Récupere les informations sur un status tel que le nombre de commentaires, j'aime, j'aime pas ...
+// Récupere les informations sur un status tel que le nombre de "j'aime", "j'aime pas" ...
 function getStatusInfo($id, $bdd)
 {
 	$req_status=$bdd->prepare('SELECT * FROM statuts WHERE id_statut = :id');
@@ -203,13 +207,43 @@ function getStatusInfo($id, $bdd)
 	$result=$req_status->fetchAll();
 	return $result;
 }
-function create_comment($id, $comment, $bdd)
+function getStatusComments($id, $bdd)
 {
-	
+	$req_status=$bdd->prepare('SELECT * FROM comment_statuts WHERE id_statut_comment = :id ORDER BY id_comment DESC');
+	$req_status->execute(array(
+		'id' => $id,
+		));
+	$result=$req_status->fetchAll();
+	return $result;
+}
+function create_comment($comment, $id, $bdd)
+{
+	$req_insert_comment=$bdd->prepare('INSERT INTO comment_statuts (id_auteur, id_statut_comment, comment) VALUES(:id_auteur, :id_statut_comment, :comment)');
+	$req_insert_comment->execute(array(
+		'id_auteur' => $_SESSION['id_membre'],
+		'id_statut_comment' => $id,
+		'comment' => $comment,
+		));
 }
 function delete_comment($id, $bdd)
 {
-	
+	$req_comment=$bdd->prepare('SELECT id_auteur FROM comment_statuts WHERE id_comment = :id');
+	$req_comment->execute(array(
+		'id' => $id,
+		));
+	$result=$req_comment->fetch();
+	if($result['id_auteur']==$_SESSION['id_membre'] || admin_check($bdd))
+	{
+		$req=$bdd->prepare('DELETE FROM comment_statuts WHERE id_comment = :id');
+		$req->execute(array(
+			'id' => $id,
+		));
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 function getUserStatus($id, $limit=15, $bdd)
 {

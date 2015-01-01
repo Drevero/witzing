@@ -12,6 +12,7 @@ Witzing Copyright (C) 2014 Rémi Duplé sous les termes de la license GNU GPL ve
 var titre_fenetre=document.title;
 var sound=document.createElement('audio');
 document.body.appendChild(sound);
+var notification_bubble_bool=false;
 function getXMLHttpRequest()
 {
 	var xhr = null;
@@ -44,13 +45,13 @@ function like_stats(id)
 			{
 				var nmb=parseInt(ndom.getElementsByTagName('like')[0].getAttribute('total'));
 				document.getElementById('text_like' + id).innerHTML=nmb-1;
-				document.getElementById('like_stats' + id).setAttribute('class', 'typo click');
+				document.getElementById('like_stats' + id).setAttribute('class', 'like_post');
 			}
 			else
 			{
 				var nmb=parseInt(ndom.getElementsByTagName('like')[0].getAttribute('total'));
 				document.getElementById('text_like' + id).innerHTML=nmb+1;
-				document.getElementById('like_stats' + id).setAttribute('class', 'use typo click');
+				document.getElementById('like_stats' + id).setAttribute('class', 'like_post clicked');
 			}
 		}
 	};
@@ -67,14 +68,14 @@ function unlike_stats(id)
 			if(ndom.getElementsByTagName('unlike')[0].getAttribute('me')=='1')
 			{
 				var nmb=parseInt(ndom.getElementsByTagName('unlike')[0].getAttribute('total'));
-				document.getElementById('notlike_text' + id).innerHTML=nmb-1;
-				document.getElementById('notlike_stats' + id).setAttribute('class', 'typo click');
+				document.getElementById('unlike_text' + id).innerHTML=nmb-1;
+				document.getElementById('unlike_stats' + id).setAttribute('class', 'unlike_post');
 			}
 			else
 			{
 				var nmb=parseInt(ndom.getElementsByTagName('unlike')[0].getAttribute('total'));
-				document.getElementById('notlike_text' + id).innerHTML=nmb+1;
-				document.getElementById('notlike_stats' + id).setAttribute('class', 'use typo click');
+				document.getElementById('unlike_text' + id).innerHTML=nmb+1;
+				document.getElementById('unlike_stats' + id).setAttribute('class', 'unlike_post clicked');
 			}
 		}
 	};
@@ -88,10 +89,85 @@ function supr_post(id)
 		if(xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0))
 		{
 			document.getElementById('conteneur_membre').removeChild(document.getElementById('post' + id));
+			notification_bubble("Votre post vient d'être supprimé", true);
 		}
 	};
 	xhr.open('GET', 'index.php?page=ajax&id_supr_post=' + id, true);
 	xhr.send(null);
+}
+function show_comments(id)
+{
+	var xhr=new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if(xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0))
+		{
+			var ndom=xhr.responseXML;
+			document.getElementById('conteneur_comment' + id).innerHTML='';
+			for(var i=ndom.getElementsByTagName('comment').length;i>0;i--)
+			{
+				e=(i-1);
+				if(e<6)
+				{
+					document.getElementById('conteneur_comment' + id).innerHTML+='<div class="comment_box" id="comment' + ndom.getElementsByTagName('comment')[e].getAttribute('id') +'"><a href="index.php?page=profile&id=' + ndom.getElementsByTagName('comment')[e].getAttribute('author_id') + '"><img src="' + ndom.getElementsByTagName('comment')[e].getAttribute('avatar') + '" class="avatar_comment"/></a><p class="author_and_comment"><span class="author_comment">' + echape_html(ndom.getElementsByTagName('comment')[e].getAttribute('author')) + '</span><span class="comment">' + ndom.getElementsByTagName('comment')[e].getAttribute('text') + '</span></p><p class="date_comment">' + ndom.getElementsByTagName('comment')[e].getAttribute('date') + '<span class="trash_comment visibility' + ndom.getElementsByTagName('comment')[e].getAttribute('me') + '" onclick="delete_comment(' + ndom.getElementsByTagName('comment')[e].getAttribute('id') + ', ' +id + ');">I</span></p></div>';
+				}
+			}
+		}
+	};
+	xhr.open('GET', 'index.php?page=ajax&show_comments=' + id, true);
+	xhr.send(null);
+}
+function delete_comment(id, id_box)
+{
+	var xhr=new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if(xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0))
+		{
+			notification_bubble("Votre commentaire vient d'être supprimé", true);
+			show_comments(id_box);
+		}
+	};
+	xhr.open('GET', 'index.php?page=ajax&delete_comment=' + id, true);
+	xhr.send(null);
+}
+function menu_activities(status)
+{
+	var menu_bann=document.getElementById('menu_bann');
+	var arrow_down=document.getElementById('arrow_down');
+	if(status)
+	{
+		menu_bann.style.left='91px';
+		arrow_down.style.transform='rotate(-90deg)';
+	}
+	else
+	{
+		menu_bann.style.left='-600px';
+		arrow_down.style.transform='rotate(0deg)';
+	}
+}
+function notification_bubble(text, type_info)
+{
+	var info_bann=document.getElementById('info_bann');
+	var info_bann_p=document.getElementById('info_bann_text');
+	info_bann_p.innerHTML=text;
+	if(type_info)
+	{
+		info_bann.setAttribute('class', 'sucess');
+	}
+	else
+	{
+		info_bann.setAttribute('class', 'failed');
+	}
+	info_bann.style.top='0px';
+	if(!notification_bubble_bool)
+	{
+		setTimeout('notification_bubble(\"' + text + '\")', 2000);
+		notification_bubble_bool=true;
+	}
+	else
+	{
+		info_bann.style.top='-100px';
+		notification_bubble_bool=false;
+	}
 }
 function boite_smiley(champ)
 {
@@ -286,6 +362,22 @@ function envois_message_salon(contenu)
 	{
 		cont_message.setAttribute('class', 'erreur');
 	}
+}
+function send_comment(id)
+{
+	var xhr=getXMLHttpRequest();
+	xhr.onreadystatechange = function() {
+	if(xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0))
+	{
+		document.getElementById('textarea_comment' + id).value='';
+		show_comments(id);
+		notification_bubble("Commentaire envoyé", true);
+	}
+	};
+	xhr.open('POST', 'index.php?page=ajax', true);
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	var contenuEncoded = encodeURIComponent(document.getElementById('textarea_comment' + id).value);
+	xhr.send('id_post=' + id + '&comment=' + contenuEncoded);
 }
 function message_salon_commun()
 {

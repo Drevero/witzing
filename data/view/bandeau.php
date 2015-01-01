@@ -1,12 +1,27 @@
 <?php
 $urlbase=$_SERVER['REQUEST_URI'];
+$info_me=getUserInfo($_SESSION['id_membre'], $bdd);
 ?>
-<div id="bandeau">
-<a href="#" title="Cliquer pour déplier">
-	<img src="<?php echo htmlspecialchars($info_user['avatar']); ?>" alt="avatar" id="avatar_member_band"/>
-	<p id="name_member"><?php echo htmlspecialchars($info_user['pseudo']); ?><img src="data/style/fleche_bas.png" alt="fleche bas" id="arrow_down"/></p>
-</a>
-<div class="separator_band"></div>
+<div id="bandeau" onmouseleave="menu_activities(false);">
+<div id="more" onclick="menu_activities(true);">
+<img src="<?php echo htmlspecialchars($info_me['avatar']); ?>" alt="avatar" id="avatar_member_band"/>
+<p id="name_member"><img src="data/style/fleche_bas.png" alt="fleche bas" id="arrow_down"/></p>
+</div>
+<div id="info_bann">
+	<p id="info_bann_text">...</p>
+</div>
+<div id="menu_bann">
+	<ul>
+		<li><a href="index.php?page=profile&id=<?php echo $_SESSION['id_membre']; ?>">Mon fil d'actu</a></li>
+		<li><a href="index.php?page=news">Actualités</a></li>
+		<li><a href="index.php?page=taverne">La taverne</a></li>
+		<li><a href="index.php?page=settings">Paramètres</a></li>
+		<li><a href="index.php?dec" class="logout">Déconnexion</a></li>
+	</ul>
+</div>
+<div id="search_tool">
+	<input type="text" placeholder="Chercher un amis, un lieu, un groupe ..." id="search"/>
+</div>
 <div id="infos">
 	<p id="notif_plan">0</p>
 	<p id="notif_amis">0</p>
@@ -36,9 +51,3 @@ $urlbase=$_SERVER['REQUEST_URI'];
 	<img src="" alt="img" onclick="lightbox('', false);" id="lightbox_img"/>
 	<span id="fermer_lightbox" onclick="lightbox('', false);">Fermer</span>
 </div>
-<div id="conteneur_mm_co">
-	<p id="amis_connecte_titre">Chargement en cours ...</p>
-	<div class="amis_connecte">
-	</div>
-</div>
-<img src="../data/style/led0.png" title="Voir mes amis connectés" id="bt_amis_co" onclick="afficher_cacher_amis();"/>
