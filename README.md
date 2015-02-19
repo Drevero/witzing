@@ -28,6 +28,8 @@ Le projet Witzing a pour vocation d'offrir un service Web de communication socia
 
 ## Informations techniques
 
+Si vous souhaitez suivre le développement de la version 0.7 de Witzing, c'est par ici : https://github.com/Drevero/witzing/tree/unstable
+
 ### Caractéristiques principales
 
 * **LIBERTÉ** : Witzing est un logiciel libre, vous pouvez l'utiliser, le modifier, le redistribuer et l'améliorer sans autres restrictions que celles stipulées par les termes de la [Licence Publique Générale GNU en version 3](http://www.gnu.org/licenses/gpl.txt "GNU General Public License Version 3")
