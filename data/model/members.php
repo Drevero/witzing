@@ -78,6 +78,54 @@ function getUserInfo($id, $bdd)
 		return $result;
 	}
 }
+function im_following($id, $bdd)
+{
+	$req=$bdd->prepare('SELECT suivis FROM membres WHERE id_membre = :id');
+	$req->execute(array(
+		'id' => $id,
+		));
+	$result=$req->fetch();
+	$following=unserialize($result['suivis']);
+	if(in_array($_SESSION['id_membre'], $following))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+function follow_member($id, $bdd)
+{
+	$req=$bdd->prepare('SELECT suivis FROM membres WHERE id_membre = :id');
+	$req->execute(array(
+		'id' => $id,
+		));
+	$result=$req->fetch();
+	$array_follow=unserialize($result['suivis']);
+	$action=true;
+	if(in_array($_SESSION['id_membre'], $array_follow))
+	{
+		$key_id=array_search($id, $array_follow);
+		unset($array_follow[$key_id]);
+		$array_follow=array_filter($array_follow);
+		$return_code=false;
+		$action=false;
+	}
+	elseif($action)
+	{
+		$array_follow[]=$_SESSION['id_membre'];
+		$return_code=true;
+	}
+	$array_moded=serialize($array_follow);
+	$final=$bdd->prepare('UPDATE membres SET suivis = :array_moded WHERE id_membre = :id');
+	$final->execute(array(
+		'array_moded' => $array_moded,
+		'id' => $id,
+		));
+	creer_notif($id, 'index.php?page=profil&id=' . $id, htmlspecialchars(member_name($_SESSION['id_membre'])) . ' c\'est abonné à vous', $bdd);
+	return $return_code;
+}
 function getUserMps($id, $bdd)
 {
 	$req=$bdd->prepare('SELECT COUNT(*) AS nmb_msg FROM messages_perso WHERE id_auteur = :id');

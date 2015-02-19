@@ -22,28 +22,34 @@ $info_me=getUserInfo($_SESSION['id_membre'], $bdd);
 <div id="search_tool">
 	<input type="text" placeholder="Chercher un amis, un lieu, un groupe ..." id="search"/>
 </div>
-<div id="infos">
-	<p id="notif_plan">0</p>
-	<p id="notif_amis">0</p>
-	<p id="notif_msg">0</p>
-	<span class="typo notif" onclick="notif('1');">w</span>
-	<span class="typo notif" onclick="notif('2');">f</span>
-	<span class="typo notif" onclick="notif('3');">b</span>
-	<img src="../data/style/fleche.png" alt="fleche" id="fleche"/>
-	<div id="cont_inf">
-		<div class="notif_conteneur" id="notif_plan_conteneur"></div>
-		<div class="notif_conteneur" id="notif_msg_conteneur"></div>
-		<div class="notif_conteneur" id="notif_amis_conteneur"></div>
-	</div>
+<div id="notif_float">
+<span id="notif_alert"></span>
+<p id="bell_notif" onclick="switch_to_notif();">9</p>
+<p id="menu_notif">4</p>
 </div>
-<select id="categorie_resp" onchange="resp_page('' + this[this.selectedIndex].value + '');">
-	<option value="">Catégorie</option>
-	<option value="index.php">Mon fil d'actu</option>
-	<option value="decouvrir.php">@Decouvrir</option>
-	<option value="salon.php">Le #Salon</option>
-	<option value="parametre.php">Paramètres</option>
-	<option value="index.php?dec">Deconnexion</option>
-</select>
+</div>
+<div id="side_bar" onmouseleave="close_notif();">
+	<div id="title_bar">
+		<p>Notifications</p>
+	</div>
+	<div id="side_bar_notification">
+		<div id="newspaper" class="selected" onclick="switch_to_notif();">
+			<p>w</p>
+		</div>
+		<div id="friends_ask" onclick="switch_to_friends();">
+			<p>f</p>
+			<span id="notif_alert_friends"></span> 
+		</div>
+		<div id="content_notification">
+			<div class="ask_bubble">
+			<a href="profile.php">
+				<img src="data/img/avatars/hebus.jpg" alt="avatar"/>
+				<p>Drevero</p>
+			</a>
+			<p class="member_tool"><span class="accept_friend">Accepter</span> / <span class="reject_member">Refuser</span></p>
+			</div>
+		</div>
+	</div>
 </div>
 <div id="lightbox">
 	<ul id="liste_smile">

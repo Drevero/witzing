@@ -4,13 +4,13 @@ header("Cache-Control: no-cache, must-revalidate");
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 $liste_emoticons=Array('smile.png', 'sad.png', 'shock.png', 'embarrassed.png', 'good.png', 'laugh.png', 'love.png', 'mail.png', 'meeting.png', 'neutral.png', 'poop.png', 'present.png', 'quiet.png', 'rotfl.png', 'sick.png', 'sleepy.png', 'smile-big.png', 'sweat.png', 'tongue.png', 'victory.png', 'weep.png', 'wink.png', 'sun.png', 'question.png', 'bad.png', 'msn.png', 'car.png', 'knife.png', 'dog.png', 'beat-up.png', 'search.png', 'silly.png', 'shout.png', 'confused.png', 'party.png', 'worship.png', 'mad-tongue.png', 'musical-note.png', 'bashful.png', 'cat.png', 'sheep.png', 'msn-busy.png', 'star.png', 'angry.png', 'rose.png', 'desire.png', 'rain.png', 'beauty.png', 'goat.png', 'ghost.png', 'soldier.png', 'bomb.png', 'moon.png', 'doh.png', 'cloudy.png', 'struggle.png', 'go-away.png', 'island.png', 'devil.png', 'snail.png', 'rainbow.png', 'plate.png', 'in-love.png', 'call-me.png', 'eat.png', 'beer.png', 'boy.png', 'can.png', 'excruciating.png', 'jump.png', 'pizza.png', 'cake.png', 'curl-lip.png', 'drool.png', 'sigarette.png', 'hammer.png', 'pissed-off.png', 'eyeroll.png', 'secret.png', 'handcuffs.png', 'mean.png', 'monkey.png', 'vampire.png', 'terror.png', 'arrogant.png', 'camera.png', 'umbrella.png', 'skywalker.png', 'nailbiting.png', 'clover.png', 'bye.png', 'tv.png', 'disdain.png', 'kiss.png', 'cow.png', 'msn-away.png', 'lying.png', 'phone.png', 'airplane.png', 'glasses-nerdy.png', 'hug-left.png', 'waiting.png', 'hug-right.png', 'angel.png', 'act-up.png', 'clock.png', 'yin-yang.png', 'bowl.png', 'lashes.png', 'foot-in-mouth.png', 'girl.png', 'dance.png', 'doctor.png', 'clown.png', 'tremble.png', 'giggle.png', 'glasses-cool.png', 'chicken.png', 'sarcastic.png', 'peace.png', 'hypnotized.png', 'moneymouth.png', 'yawn.png', 'liquor.png', 'film.png', 'snowman.png', 'starving.png', 'drink.png', 'clap.png', 'snicker.png', 'skeleton.png', 'curse.png', 'msn_online.png', 'handshake.png', 'coffee.png', 'qq.png', 'lamp.png', 'blowkiss.png', 'rose-dead.png', 'soccerball.png', 'thunder.png', 'hungry.png', 'cowboy.png', 'brb.png', 'pray.png', 'disapointed.png', 'mobile.png', 'coins.png', 'shut-mouth.png', 'highfive.png', 'pill.png', 'alien.png', 'freaked-out.png', 'wilt.png', 'fingers-crossed.png', 'computer.png', 'console.png', 'smirk.png', 'pig.png', 'teeth.png', 'pumpkin.png', 'turtle.png', 'watermelon.png', 'cute.png', 'dazed.png', 'flag.png');
 $texte_emo=Array(':)', ':(', ':O', ':X', '(y)', 'xD', '<3', ':mail:', ':meeting:', ':/ ', ':caca:', ':cadeau:', ':chut:', "x\'D", ':malade:', ':dormir:', ':D', "--\'", ':P', '\o/', ":\'(", ';)', ':soleil:', ':hein:', '(n)', '[[msn]]', '[[voiture]]', '[[kanife]]', '[[chien]]', '[[ouch]]', '[[loupe]]', '[[ailleurs]]', '[[cri]]', '[[confus]]', '[[fete]]', '[[exercice]]', '[[moquerie]]', '[[musique]]', '[[repos]]', '[[chat]]', '[[chevre]]', '[[msnoccupe]]', '[[etoile]]', '[[enerve]]', '[[rose]]', '\*\.\*', '[[pluie]]', '[[beaute]]', '[[chevre2]]', '[[fantome]]', '[[soldat]]', '[[bombe]]', '[[lune]]', '[[doh]]', '[[nuageux]]', '[[pensif]]', '[[jereviens]]', '[[ile]]', '[[diable]]', '[[escargot]]', '[[arcenciel]]', '[[couvert]]', '[[coupdefoudre]]', '[[appellemoi]]', '[[manger]]', '[[biere]]', '[[homme]]', '[[canette]]', 'D:', '[[saut]]', '[[pizza]]', '[[gateau]]', '[[fausettes]]', '[[bave]]', '[[cigarette]]', '[[marteau]]', '[[nerf]]', '[[eyeroll]]', '[[secret]]', '[[menottes]]', '[[determine]]', '[[singe]]', '[[vampire]]', '[[terroriste]]', '[[arrogant]]', '[[camera]]', '[[parapluie]]', '[[pilote]]', '[[stress]]', '[[trefle]]', '[[bye]]', '[[tv]]', '[[moqueur]]', '[[bisous]]', '[[vache]]', '[[msnreviens]]', '[[menteur]]', '[[telephone]]', '[[avions]]', '[[intellectuel]]', '[[gauche]]', '[[patient]]', '[[droite]]', '[[ange]]', ':hap:', '[[heure]]', '[[yinyang]]', '[[riz]]', '[[cils]]', '[[piedsurbouche]]', '[[femme]]', '[[danse]]', '[[docteur]]', '[[clown]]', '[[tremble]]', '[[hihi]]', '[[cool]]', '[[poulet]]', '[[sarcastic]]', '[[paix]]', '[[hypnose]]', '[[argent]]', '[[baille]]', '[[liqueur]]', '[[film]]', '[[bonhommeneige]]', '[[faim]]', '[[boire]]', '[[applaudir]]', '[[clin]]', '[[squelette]]', '[[enerveplus]]', '[[msnenligne]]', '[[tchek]]', '[[cafe]]', '[[pinguin]]', '[[lampe]]', '[[douxbaiser]]', '[[rosemorte]]', '[[foot]]', '[[orage]]', '[[enerve3]]', '[[cowboy]]', '[[brb]]', '[[prier]]', '[[malenpoint]]', '[[mobile]]', '[[coints]]', '[[shadup]]', '[[tape5]]', '[[pillule]]', '[[alien]]', '[[enerve4]]', '[[timide]]', '[[croise]]', '[[ordinateur]]', '[[console]]', '[[smirk]]', '[[cochon]]', '[[dents]]', '[[halloween]]', '[[tortue]]', '[[melons]]', '[[meugnon]]', '[[dazed]]', '[[usa]]');
-
 ?>
 /*
 Witzing Copyright (C) 2014 Rémi Duplé sous les termes de la license GNU GPL version 3 (voir le fichier "licence.txt")
 */
 var titre_fenetre=document.title;
 var sound=document.createElement('audio');
+var sound_play=false;
 document.body.appendChild(sound);
 var notification_bubble_bool=false;
 function getXMLHttpRequest()
@@ -33,6 +33,214 @@ function getXMLHttpRequest()
 	}
 	
 	return xhr;
+}
+function switch_to_notif()
+{
+	document.getElementById('side_bar').style.left='70%';
+	document.getElementById('side_bar').style.display='block';
+	document.getElementById('side_bar').style.display='block';
+	document.getElementById('side_bar_notification').style.display='block';
+	document.getElementById('newspaper').setAttribute('class', 'selected');
+	document.getElementById('friends_ask').setAttribute('class', '');
+	var xhr=new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if(xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0))
+		{
+			var ndom=xhr.responseXML;
+			var notif=ndom.getElementsByTagName('notif');
+			var alert_notif=ndom.getElementsByTagName('alert');
+			document.getElementById('content_notification').innerHTML='';
+			for(var i=0;i<notif.length;i++)
+			{
+				if(notif[i].getAttribute('friendask')=='false')
+				{
+					var div=document.createElement('div');
+					div.setAttribute('class', 'notification_bubble');
+					var a=document.createElement('a');
+					a.setAttribute('href', notif[i].getAttribute('link'));
+					var img=document.createElement('img');
+					img.setAttribute('src', notif[i].getAttribute('avatar'));
+					var p=document.createElement('p');
+					p.innerHTML=notif[i].getAttribute('content');
+					p.setAttribute('class', 'new' + notif[i].getAttribute('read'));
+					div.appendChild(a);
+					a.appendChild(img);
+					a.appendChild(p);
+					document.getElementById('content_notification').appendChild(div);
+					document.getElementById('notif_alert_friends').style.display='none';
+				}
+				else
+				{
+					document.getElementById('notif_alert_friends').style.display='block';
+				}
+			}
+			if(alert_notif[0].getAttribute('stat')=='1')
+			{
+				document.getElementById('notif_alert').style.display='block';
+			}
+			read_all();
+		}
+	};
+	xhr.open('GET', 'index.php?page=ajax&mynotifications', true);
+	xhr.send(null);
+}
+function reject_member(id)
+{
+	var xhr=new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if(xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0))
+		{
+			switch_to_friends();
+		}
+	};
+	xhr.open('GET', 'index.php?page=ajax&reject_member=' + id, true);
+	xhr.send(null);
+}
+function accept_friend(id)
+{
+	var xhr=new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if(xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0))
+		{
+			switch_to_friends();
+		}
+	};
+	xhr.open('GET', 'index.php?page=ajax&accept_friend=' + id, true);
+	xhr.send(null);
+}
+function switch_to_friends()
+{
+	document.getElementById('friends_ask').setAttribute('class', 'selected');
+	document.getElementById('newspaper').setAttribute('class', '');
+	var xhr=new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if(xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0))
+		{
+			var ndom=xhr.responseXML;
+			var notif=ndom.getElementsByTagName('notif');
+			var alert_notif=ndom.getElementsByTagName('alert');
+			document.getElementById('content_notification').innerHTML='';
+			for(var i=0;i<notif.length;i++)
+			{
+				if(notif[i].getAttribute('friendask')=='true')
+				{
+					var div=document.createElement('div');
+					div.setAttribute('class', 'ask_bubble');
+					var a=document.createElement('a');
+					a.setAttribute('href', notif[i].getAttribute('link'));
+					var img=document.createElement('img');
+					img.setAttribute('src', notif[i].getAttribute('avatar'));
+					var p=document.createElement('p');
+					p.innerHTML=notif[i].getAttribute('name');
+					var p2=document.createElement('p');
+					p2.innerHTML='<span class="accept_friend" onclick="accept_friend(' + notif[i].getAttribute('id') + ');">Accepter</span> / <span class="reject_member" onclick="reject_member(' + notif[i].getAttribute('id') + ');">Refuser</span>';
+					p2.setAttribute('class', 'member_tool');
+					div.appendChild(a);
+					a.appendChild(img);
+					a.appendChild(p);
+					div.appendChild(p);
+					div.appendChild(p2);
+					document.getElementById('content_notification').appendChild(div);
+				}
+			}
+			read_all();
+		}
+	};
+	xhr.open('GET', 'index.php?page=ajax&mynotifications', true);
+	xhr.send(null);
+}
+function read_all()
+{
+	var xhr=new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if(xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0))
+		{
+		}
+	};
+	xhr.open('GET', 'index.php?page=ajax&read_all', true);
+	xhr.send(null);
+}
+function check_notif()
+{
+	var xhr=new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if(xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0))
+		{
+			var ndom=xhr.responseXML;
+			var alert_notif=ndom.getElementsByTagName('alert');
+			if(alert_notif[0].getAttribute('stat')>=1)
+			{
+				document.getElementById('notif_alert').style.display='block';
+				document.title='(' + alert_notif[0].getAttribute('stat') + ') ' + titre_fenetre;
+				if(!sound_play)
+				{
+					sound_play=true;
+					sound.src='data/pop2.ogg';
+					sound.play();
+				}
+			}
+			else
+			{
+				document.title=titre_fenetre;
+				document.getElementById('notif_alert').style.display='none';
+				if(sound_play)
+				{
+					sound_play=false;
+					sound.pause();
+				}
+			}
+		}
+	};
+	xhr.open('GET', 'index.php?page=ajax&notif_and_msg', true);
+	xhr.send(null);
+	setTimeout('check_notif()', 5000);
+}
+function close_notif()
+{
+	document.getElementById('side_bar_notification').style.display='none';
+	document.getElementById('side_bar').style.display='none';
+	document.getElementById('content_notification').innerHTML='';
+}
+function friend_action(id)
+{
+	var xhr=new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if(xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0))
+		{
+			var ndom=xhr.responseXML;
+			var stat=ndom.getElementsByTagName('friend')[0].getAttribute('stat');
+			document.getElementById('friends_button').setAttribute('class', stat);
+		}
+	};
+	xhr.open('GET', 'index.php?page=ajax&friend=' + id, true);
+	xhr.send(null);
+}
+function follow_action(id)
+{
+	var xhr=new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if(xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0))
+		{
+			var ndom=xhr.responseXML;
+			var stat=ndom.getElementsByTagName('follow')[0].getAttribute('stat');
+			var nmb_followers=ndom.getElementsByTagName('follow')[0].getAttribute('nmb');
+			if(stat=='1')
+			{
+				document.getElementById('follow_button').innerHTML='Abonné';
+				document.getElementById('nmb_followers').innerHTML=nmb_followers;
+				document.getElementById('follow_button').setAttribute('class', 'follower');
+				
+			}
+			else
+			{
+				document.getElementById('nmb_followers').innerHTML=nmb_followers;
+				document.getElementById('follow_button').innerHTML='Je m\'abonne';
+				document.getElementById('follow_button').setAttribute('class', '');
+			}
+		}
+	};
+	xhr.open('GET', 'index.php?page=ajax&follow=' + id, true);
+	xhr.send(null);
 }
 function like_stats(id)
 {
@@ -960,5 +1168,6 @@ if(~navigator.userAgent.indexOf('Windows'))
 		document.getElementsByClassName('notif')[2].style.top='1px';
 	}
 }
+check_notif();
 cherche_notif();
 recup_nmb_co();
