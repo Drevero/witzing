@@ -8,7 +8,7 @@ $badges_me=unserialize($info_user['badges']);
 $amis=unserialize($info_user['amis']);
 $mps=getUserMps($_GET['id'], $bdd);
 $abonnes=unserialize($info_user['suivis']);
-$aime=unserialize($info_user['aime']);
+$aime=fetch_all_likes($_GET['id'], $bdd);
 $liste_demande=unserialize($info_user['attente_amis']);
 $theme_url=array('defaut', 'aero.css');
 $badges_url=array('beta-testeur.png', 'donateur.png', 'idees.png', 'inscrit.png', 'vacancier.png');
@@ -19,10 +19,10 @@ if(isset($_POST['post_text']) && isset($_POST['destinataire']) && isset($_FILES[
 	$bool_id=create_status($_POST['post_text'], $_POST['destinataire'], $_FILES['fichier_photo'], $_POST['photo_change'], $bdd);
 	if($bool_id)
 	{
-		header('Location: #post' . $bool_id); // ¡ FIX !
+		header('Location: #post' . $bool_id);
 	}
 }
-if(!isset($_GET['id']))
+if(!isset($_GET['id']) || !$info_user)
 {
 	header('Location: index.php?page=profile&id=' . $_SESSION['id_membre']);
 }

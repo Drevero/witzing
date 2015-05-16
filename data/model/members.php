@@ -95,6 +95,20 @@ function im_following($id, $bdd)
 		return false;
 	}
 }
+function fetch_all_likes($id, $bdd)
+{
+	$first_req=$bdd->prepare('SELECT * FROM statuts WHERE ecrivain_statut = :id');
+	$first_req->execute(array(
+		'id' => $id,
+		));
+	$nmb_likes=0;
+	while($result=$first_req->fetch())
+	{
+		$status_likes=$result['aime_statut'];
+		$nmb_likes+=count(unserialize($status_likes));
+	}
+	return $nmb_likes;
+}
 function follow_member($id, $bdd)
 {
 	$req=$bdd->prepare('SELECT suivis FROM membres WHERE id_membre = :id');
@@ -123,7 +137,8 @@ function follow_member($id, $bdd)
 		'array_moded' => $array_moded,
 		'id' => $id,
 		));
-	creer_notif($id, 'index.php?page=profil&id=' . $id, htmlspecialchars(member_name($_SESSION['id_membre'])) . ' c\'est abonné à vous', $bdd);
+	$info=getUserInfo($_SESSION['id_membre'], $bdd);
+	creer_notif($id, 'index.php?page=profile&id=' . $_SESSION['id_membre'], $info['pseudo'] . ' s\'est abonné à vous', $bdd);
 	return $return_code;
 }
 function getUserMps($id, $bdd)
@@ -168,7 +183,7 @@ function callback_mmco($matches)
 }
 function ismyFriend($id, $bdd)
 {
-	$info=getUserInfo($_SESSION['id_membre'], $bdd);
+	$info=getUserInfo($id, $bdd);
 	$info_friend=unserialize($info['amis']);
 	if(in_array($_SESSION['id_membre'], $info_friend))
 	{

@@ -30,7 +30,7 @@ include('data/view/bandeau.php');
 		<img src="<?php echo htmlspecialchars($info_user['avatar']); ?>" alt="avatar" id="avatar_banner"/>
 		<p id="pseudo_info"><a href="index.php?page=profile&id=<?php echo $info_user['id_membre']; ?>"><?php echo htmlspecialchars($info_user['pseudo']); ?></a>
 		<div id="content_social">
-			<p id="social_markers"><a href="#"><span id="nmb_followers"><?php echo count($abonnes); ?></span> abonné<?php if(count($abonnes)>1) { echo 's'; } ?></a><a href="#" class="space_btw_marker"><?php echo count($aime); ?> aime<?php if(count($aime)>1) { echo 'nt'; } ?></a><a href="#" class="space_btw_marker"><?php echo count($amis); ?> ami<?php if(count($amis)>1) { echo 's'; } ?></a><a href="#" class="space_btw_marker"><?php echo $mps; ?> message<?php if($mps>1) { echo 's'; } ?></a></p></div>
+			<p id="social_markers"><a href="#"><span id="nmb_followers"><?php echo count($abonnes); ?></span> abonné<?php if(count($abonnes)>1) { echo 's'; } ?></a><a href="#" class="space_btw_marker"><?php echo $aime; ?> aime<?php if($aime>1) { echo 'nt'; } ?></a><a href="#" class="space_btw_marker"><?php echo count($amis); ?> ami<?php if(count($amis)>1) { echo 's'; } ?></a><a href="#" class="space_btw_marker"><?php echo $mps; ?> message<?php if($mps>1) { echo 's'; } ?></a></p></div>
 			<?php if($info_user['id_membre']!=$_SESSION['id_membre']) { ?><div id="social_buttons"><p id="friends_button" <?php if(in_array($_SESSION['id_membre'], $liste_demande)) { echo 'class="waiting"'; } elseif(in_array($_SESSION['id_membre'], $amis)) { echo 'class="my_friend"'; } ?> onclick="friend_action(<?php echo $info_user['id_membre']; ?>);">f</p><div class="separator_band_buttons"></div><p id="follow_button" class="<?php if(im_following($_GET['id'], $bdd)) { echo 'follower'; } ?>" onclick="follow_action(<?php echo $info_user['id_membre']; ?>);"><?php if(im_following($_GET['id'], $bdd)) { echo 'Abonné'; } else { echo 'Je m\'abonne'; } ?></p></div><?php } ?>
 		</div>
 		<div class="title_content_ban whats_new<?php if(!in_array($_SESSION['id_membre'], $amis) && $_GET['id']!=$_SESSION['id_membre']) { echo ' hide'; } ?>">
@@ -174,6 +174,7 @@ include('data/view/bandeau.php');
 			<?php
 		} */
 		?>
+</div>
 </div>
 <script type="text/javascript" src="data/witzing.php"></script>
 </body>

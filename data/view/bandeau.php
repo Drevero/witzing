@@ -52,6 +52,9 @@ $info_me=getUserInfo($_SESSION['id_membre'], $bdd);
 	</div>
 </div>
 <div id="lightbox">
+	<div id="content_arrow_slide">
+		<img src="data/style/slide_right.png" alt="img" id="slide_right_arrow"/>
+	</div>
 	<ul id="liste_smile">
 	</ul>
 	<img src="" alt="img" onclick="lightbox('', false);" id="lightbox_img"/>

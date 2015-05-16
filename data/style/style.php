@@ -143,6 +143,20 @@ body {
 	height: 100%;
 	background: #e5e5e5;
 }
+.loader_universal {
+	top: 50px;
+	display: block;
+	position: relative;
+	height: 40px;
+	margin-left: 50%;
+}
+.no_ask_friends {
+	text-align: center;
+	font-family: OpenSans;
+	color: white;
+	display: inline-block;
+	width: 100%;
+}
 .body_accueil {
 	background: #ffffff;
 }
@@ -330,6 +344,9 @@ body {
 	position: absolute;
 	top: 15px;
 	left: 70px;
+}
+.post:target {
+	margin: auto;
 }
 #post_text {
 	display: block;
@@ -614,7 +631,7 @@ span#fermer_lightbox {
 	font-size: 15px;
 	cursor: pointer;
 }
-div#lightbox img {
+#lightbox_img {
 	display: block;
 	max-height: 95%;
 	cursor: pointer;
@@ -708,7 +725,24 @@ div#lightbox {
 	top: 0%;
 	width: 100%;
 	left: 0%;
-	background-color: #1b1b1b;
+	background: url('fade.png');
+}
+#content_arrow_slide {
+	display: none;
+	position: fixed;
+	height: 200px;
+	border: 1px solid red;
+	width: 100%;
+	z-index: 100;
+	top: 35%;
+}
+#slide_right_arrow {
+	display: block;
+	position: relative;
+	z-index: 100;
+	top: 0px;
+	left: 0px;
+	float: right;
 }
 .badge {
 	display: inline-block;
@@ -1965,7 +1999,22 @@ input.publier_post:hover {
 	display: block;
 	position: relative;
 	height: 65px;
+	top: 1px;
+	margin-bottom: 5px;
 	width: 100%;
+	transition: 0.2s all ease-in-out;
+	-moz-transition: 0.2s all ease-in-out;
+	-o-transition: 0.2s all ease-in-out;
+	-ms-transition: 0.2s all ease-in-out;
+	-webkit-transition: 0.2s all ease-in-out;
+}
+#lightbox_fade {
+	position: fixed;
+	display: block;
+	top: 0px;
+	height: 100%;
+	width: 100%;
+	z-index: 1000;
 }
 .ask_bubble {
 	display: block;
@@ -1998,6 +2047,7 @@ input.publier_post:hover {
 }
 .notification_bubble:hover {
 	background: #606060;
+	border-left: 15px solid #303030;
 }
 #title_bar {
 	height: 55px;

@@ -69,14 +69,19 @@ function create_status($content, $id, $image, $stat_img, $bdd)
 					$mm_exi=$req_mm_exi->fetch();
 					if($mm_exi && $mm_exi['id_membre']!=$_SESSION['id_membre'])
 					{
-						creer_notif($mm_exi['id_membre'], 'index.php?id=' . $id, $info_user['pseudo'] . ' vient de vous citer !', $info_user['avatar']);
+						creer_notif($mm_exi['id_membre'], 'index.php?id=' . $id, $info_user['pseudo'] . ' vient de vous citer !', $bdd);
 					}
 				}
 			}
 		}
+		$req=$bdd->prepare('SELECT pseudo FROM membres WHERE id_membre = :id');
+		$req->execute(array(
+			'id' => $_SESSION['id_membre'],
+			));
+		$res=$req->fetch();
 		if($id!=$_SESSION['id_membre'])
 		{
-			creer_notif($id, 'index.php?id=' . $id, $info_user['pseudo'] . ' vient de publier sur votre fil d\'actu !', $info_user['avatar'], $bdd);
+			creer_notif($id, 'index.php?id=' . $id, $res['pseudo'] . ' vient de publier sur votre fil d\'actu !', $bdd);
 		}
 		for($i=0;$i<count($liste_suiveur);$i++)
 		{
@@ -84,7 +89,7 @@ function create_status($content, $id, $image, $stat_img, $bdd)
 			{
 				if($id==$_SESSION['id_membre'])
 				{
-					creer_notif($liste_suiveur[$i], 'index.php?id=' . $id, $info_user['pseudo'] . ' vient de publier un statut !', $info_user['avatar'], $bdd);
+					creer_notif($liste_suiveur[$i], 'index.php?id=' . $id, $res['pseudo'] . ' vient de publier un statut !', $bdd);
 				}
 			}
 		}
@@ -224,6 +229,16 @@ function create_comment($comment, $id, $bdd)
 		'id_statut_comment' => $id,
 		'comment' => $comment,
 		));
+	$info=getUserInfo($_SESSION['id_membre'], $bdd);
+	$req_status=$bdd->prepare('SELECT * FROM statuts WHERE id_statut = :id');
+	$req_status->execute(array(
+		'id' => $id,
+		));
+	$result=$req_status->fetch();
+	if($_SESSION['id_membre']!=$result['ecrivain_statut'])
+	{
+		creer_notif($result['ecrivain_statut'], 'index.php?page=profile&id=' . $result['ecrivain_statut'] . '&post' . $id, $info['pseudo'] . ' vient de commenter votre statut', $bdd);
+	}
 }
 function delete_comment($id, $bdd)
 {

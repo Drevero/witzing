@@ -2,13 +2,13 @@
 /* 
 tools.php contient toutes les fonctions qui consiste aux post-traitement de certaines données 
 */
-function coupeur($chaine)
+function coupeur($chaine, $lng)
 {
-	if(strlen($chaine)>50)
+	if(strlen($chaine)>$lng)
 	{
 		$chaine_decomp=str_split($chaine);
 		$prochaine_chaine='';
-		for($i=0;$i<30;$i++)
+		for($i=0;$i<$lng;$i++)
 		{
 			$prochaine_chaine.=$chaine_decomp[$i];
 		}

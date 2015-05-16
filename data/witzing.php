@@ -34,6 +34,15 @@ function getXMLHttpRequest()
 	
 	return xhr;
 }
+function put_loader(id_div)
+{
+	var div_content=document.getElementById(id_div);
+	div_content.innerHTML='';
+	var gif_img=document.createElement('img');
+	gif_img.src='data/style/loader.gif';
+	gif_img.setAttribute('class', 'loader_universal');
+	div_content.appendChild(gif_img);
+}
 function switch_to_notif()
 {
 	document.getElementById('side_bar').style.left='70%';
@@ -42,6 +51,7 @@ function switch_to_notif()
 	document.getElementById('side_bar_notification').style.display='block';
 	document.getElementById('newspaper').setAttribute('class', 'selected');
 	document.getElementById('friends_ask').setAttribute('class', '');
+	put_loader('content_notification');
 	var xhr=new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
 		if(xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0))
@@ -119,11 +129,13 @@ function switch_to_friends()
 			var ndom=xhr.responseXML;
 			var notif=ndom.getElementsByTagName('notif');
 			var alert_notif=ndom.getElementsByTagName('alert');
+			var one_ask=false;
 			document.getElementById('content_notification').innerHTML='';
 			for(var i=0;i<notif.length;i++)
 			{
 				if(notif[i].getAttribute('friendask')=='true')
 				{
+					one_ask=true;
 					var div=document.createElement('div');
 					div.setAttribute('class', 'ask_bubble');
 					var a=document.createElement('a');
@@ -142,6 +154,10 @@ function switch_to_friends()
 					div.appendChild(p2);
 					document.getElementById('content_notification').appendChild(div);
 				}
+			}
+			if(!one_ask)
+			{
+				document.getElementById('content_notification').innerHTML='<span class="no_ask_friends">Pas de demandes d\'amis actuellement</span>';
 			}
 			read_all();
 		}
@@ -221,24 +237,24 @@ function follow_action(id)
 	xhr.onreadystatechange = function() {
 		if(xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0))
 		{
-			var ndom=xhr.responseXML;
-			var stat=ndom.getElementsByTagName('follow')[0].getAttribute('stat');
-			var nmb_followers=ndom.getElementsByTagName('follow')[0].getAttribute('nmb');
-			if(stat=='1')
-			{
-				document.getElementById('follow_button').innerHTML='Abonné';
-				document.getElementById('nmb_followers').innerHTML=nmb_followers;
-				document.getElementById('follow_button').setAttribute('class', 'follower');
-				
-			}
-			else
-			{
-				document.getElementById('nmb_followers').innerHTML=nmb_followers;
-				document.getElementById('follow_button').innerHTML='Je m\'abonne';
-				document.getElementById('follow_button').setAttribute('class', '');
-			}
 		}
 	};
+	var ndom=xhr.responseXML;
+	var stat=document.getElementById('follow_button');
+	var nmb_followers=document.getElementById('nmb_followers').innerHTML;
+	nmb_followers=parseInt(nmb_followers);
+	if(stat.getAttribute('class')=='')
+	{
+		document.getElementById('follow_button').innerHTML='Abonné';
+		document.getElementById('nmb_followers').innerHTML=nmb_followers+=1;
+		document.getElementById('follow_button').setAttribute('class', 'follower');	
+	}
+	else
+	{
+		document.getElementById('nmb_followers').innerHTML=nmb_followers-=1;
+		document.getElementById('follow_button').innerHTML='Je m\'abonne';
+		document.getElementById('follow_button').setAttribute('class', '');
+	}
 	xhr.open('GET', 'index.php?page=ajax&follow=' + id, true);
 	xhr.send(null);
 }

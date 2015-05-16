@@ -40,7 +40,7 @@ if(isset($_GET['show_comments']))
 		$member_comment=getUserInfo($comments[$i]['id_auteur'], $bdd);
 		$isme=(($comments[$i]['id_auteur']==$_SESSION['id_membre'])) ? $isme=1 : $isme=0;
 		$comments[$i]['date_comment']=preg_replace_callback('#(.+)-(.+)-(.+) (.+):(.+):(.+)#i', 'dateur', $comments[$i]['date_comment']);
-		$return_data.='<comment me="' . $isme . '" id="' . $comments[$i]['id_comment'] . '" author_id="' . $comments[$i]['id_auteur'] . '" author="' . htmlspecialchars($member_comment['pseudo']) . '" date="' . $comments[$i]['date_comment'] . '" text="' . htmlspecialchars(markdown(linkeur(hashtageur(citeur_mm($comments[$i]['comment']))))) . '" avatar="' . htmlspecialchars($member_comment['avatar']) . '"/>';
+		$return_data.='<comment me="' . $isme . '" id="' . $comments[$i]['id_comment'] . '" author_id="' . $comments[$i]['id_auteur'] . '" author="' . coupeur(htmlspecialchars($member_comment['pseudo']), 6) . '" date="' . $comments[$i]['date_comment'] . '" text="' . htmlspecialchars(markdown(linkeur(hashtageur(citeur_mm($comments[$i]['comment']))))) . '" avatar="' . htmlspecialchars($member_comment['avatar']) . '"/>';
 	}
 }
 if(isset($_GET['follow']))
@@ -50,7 +50,7 @@ if(isset($_GET['follow']))
 	$nmb_followers=count($followers);
 	if($_GET['follow']!=$_SESSION['id_membre'])
 	{
-		$return_code=follow_member($_GET['follow'], $bdd);
+		$return_data=follow_member($_GET['follow'], $bdd);
 		if($return_code)
 		{
 			$return_data='<follow stat="1" nmb="' . $nmb_followers . '"/>';
@@ -112,7 +112,7 @@ if(isset($_GET['accept_friend']))
 }
 if(isset($_GET['mynotifications']))
 {
-	$req=$bdd->prepare('SELECT * FROM notifications WHERE membre_notif = :id ORDER BY id_notif DESC LIMIT 0, 15');
+	$req=$bdd->prepare('SELECT * FROM notifications WHERE membre_notif = :id ORDER BY id_notif DESC LIMIT 0, 12');
 	$req->execute(array(
 		'id' => $_SESSION['id_membre'],
 		));
