@@ -612,11 +612,13 @@ p.date_texte {
 	color: #a2a2a2;
 	display: block;
 	position: relative;
-	top: -14px;
-	left: 58px;
 	z-index: 1;
-	font-size: 15px;
 	font-family: OpenSans;
+	text-align: right;
+	top: 0px !important;
+	left: 30px;
+	z-index: 1;
+	font-size: 12px !important;
 }
 span.date_texte {
 	color: #a2a2a2;
@@ -993,16 +995,10 @@ input#bt_retour_discu {
 }
 .avat_msg_droite {
 	position: relative !important;
-	float: right;
+	float: left !important;
 	right: 20px;
-}
-.date_texte_droite {
-	text-align: right;
-	left: -30px !important;
-}
-.texte_msg_droite {
-	text-align: right;
-	left: -30px !important;
+    top: 10px !important;
+    left: -10px !important;
 }
 .texte_msg_droite img.mini_img {
 	float: right;
@@ -1303,12 +1299,29 @@ form#message {
 p.texte_msg {
 	display: block;
 	position: relative;
-	left: 58px;
 	z-index: 1;
-	width: 95%;
 	top: -20px;
-	font-size: 15px;
 	font-family: OpenSans;
+    padding: 5px;
+    position: relative;
+    color: white;
+    font-size: 13px;
+    border: 1px solid #0084FF;
+    background: #0084FF;
+    border-radius: 10px;
+    left: -20px !important;
+    width: auto;
+    float: right;
+}
+.texte_msg_droite::after {
+    display: block;
+    position: absolute;
+    height: 12px;
+    width: 6px;
+    left: -7px;
+    top: 8px;
+    content: "";
+    background: url('http://witzing.net/data/style/left_message.png');
 }
 img.avat_msg {
 	height: 50px;
@@ -1319,7 +1332,10 @@ img.avat_msg {
 	-ms-border-radius: 10px;
 	border-radius: 10px;
 	display: block;
-	position: absolute;
+	position: relative;
+    top: 10px !important;
+    float: right;
+    left: -10px !important;
 }
 div.cadre_msg {
 	display: block;
@@ -1331,6 +1347,10 @@ div.cadre_msg {
 	margin-top: -1px;
 	overflow-x: hidden;
 	word-wrap: break-word;
+}
+.cadre_msg a img {
+    display: block !important;
+    border-radius: 100%;
 }
 img#con_message {
 	display: inline;
@@ -1344,7 +1364,7 @@ img#con_message {
 p#pseudo_converse {
 	font-family: OpenSans;
 	color: #000000;
-	font-size: 30px;
+	font-size: 20px;
 	display: block;
 	position: relative;
 	width: 100%;
@@ -1355,11 +1375,13 @@ div#conteneur_messages {
 	min-height: 500px;
 	height: auto;
 	margin: auto;
+	top: -20px;
 }
 .emoticons {
 	display: inline-block;
 	position: relative;
-	margin-bottom: -6px;
+	margin-bottom: -5px;
+    height: 20px !important;
 }
 div#conteneur_flux_dynamique {
 	position: relative;
@@ -2052,4 +2074,20 @@ a.supr_comment_moi {
 }
 a.supr_comment_moi:hover {
 	color: #cb6868 !important;
+}
+.texte_msg_droite {
+    padding: 5px;
+    position: relative !important;
+    color: black !important;
+    border: 1px solid #F1EFF0 !important;
+    border: 1px solid #F1EFF0 !important;
+    background: #F1EFF0 !important;
+    width: auto !important;
+    float: left !important;
+    margin-left: 20px !important;
+    text-align: center !important;
+}
+.date_texte_droite {
+	text-align: left !important;
+	left: 0px !important;
 }
